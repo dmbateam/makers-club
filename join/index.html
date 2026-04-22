@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>join — ai makers club</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { background: var(--paper); min-height: 100%; }
+  html { scroll-padding-top: 88px; }
+  body { margin: 0; font-family: var(--ff-mono); color: var(--ink); display: flex; flex-direction: column; min-height: 100vh; }
+
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 40px; width: 100%; box-sizing: border-box; }
+
+  /* ------- nav (same as /) ------- */
+  nav.top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0; border-bottom: var(--border);
+    position: sticky; top: 0; background: var(--paper); z-index: 10;
+  }
+  nav.top .lockup { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+  nav.top .lockup svg { width: 34px; height: 22px; display: block; overflow: visible; }
+  nav.top .lockup .wm { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+  nav.top .nav-right { display: flex; align-items: center; gap: 24px; }
+  nav.top .links { display: flex; gap: 22px; font-size: 13px; }
+  nav.top .links a { color: var(--ink); text-decoration: none; padding: 4px 8px; transition: background 120ms ease, color 120ms ease; }
+  nav.top .links a:hover { background: var(--ink); color: var(--paper); }
+
+  /* ------- paddle mount ------- */
+  main.join-main {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    padding: 72px 0;
+  }
+  #paddle-form {
+    width: 100%;
+    max-width: 560px;
+    min-height: 420px;
+    box-sizing: border-box;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <nav class="top">
+    <a class="lockup" href="/">
+      <svg viewBox="4 20 116 74">
+        <g font-family="'JetBrains Mono', monospace" fill="#15224A">
+          <text x="10" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em">[</text>
+          <rect x="44" y="36" width="30" height="54"></rect>
+          <text x="78" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em">]</text>
+        </g>
+      </svg>
+      <span class="wm">ai makers club</span>
+    </a>
+    <div class="nav-right">
+      <div class="links">
+        <a href="/#rhythm">rhythm</a>
+        <a href="/#who">who &amp; where</a>
+        <a href="/#faq">faq</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="join-main">
+    <!-- paddle embed mounts here -->
+    <div id="paddle-form" class="paddle-checkout"></div>
+  </main>
+</div>
+
+<script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+<script>
+  Paddle.Setup({ vendor: 123372 });
+  Paddle.Checkout.open({
+    product: 924249,
+    method: 'inline',
+    frameTarget: 'paddle-checkout',
+    frameInitialHeight: 500,
+    frameStyle: 'width:100%; min-width:320px; background-color: transparent; border: none;'
+  });
+</script>
+
+</body></html>

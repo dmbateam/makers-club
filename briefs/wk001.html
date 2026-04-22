@@ -4,10 +4,30 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>week 001 — build a skill.md that saves an hour a week · ai makers club</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
 <link rel="stylesheet" href="../colors_and_type.css"/>
 <style>
   html, body { background: var(--paper); }
-  body { margin: 0; padding: 64px 32px; font-family: var(--ff-mono); color: var(--ink); }
+  body { margin: 0; padding: 32px 32px 64px; font-family: var(--ff-mono); color: var(--ink); }
+
+  .page-back {
+    max-width: 820px;
+    margin: 0 auto 20px;
+    padding: 0 4px;
+    box-sizing: border-box;
+    font-family: var(--ff-mono);
+  }
+  .page-back a {
+    display: inline-block;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 14px;
+    border: var(--border);
+    background: var(--paper);
+    transition: background 120ms ease, color 120ms ease;
+  }
+  .page-back a:hover { background: var(--ink); color: var(--paper); }
 
   .sheet {
     max-width: 820px;
@@ -23,12 +43,14 @@
     display: flex; justify-content: space-between; align-items: center;
     font-family: var(--ff-mono); font-size: 12px; color: var(--ink-2);
   }
-  .topline .left { display: flex; align-items: center; gap: 10px; }
+  .topline .left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
   .topline .left svg { width: 34px; height: 22px; display: block; overflow: visible; }
   .topline .left .wm {
     font-family: var(--ff-mono); font-weight: 700; font-size: 18px;
     color: var(--ink); letter-spacing: -0.02em; line-height: 1;
+    transition: color 120ms ease;
   }
+  .topline a.left:hover .wm { color: var(--riso-red-ink); }
   .topline .right { text-align: right; }
 
   .title-block { margin-top: 40px; }
@@ -129,10 +151,14 @@
 </head>
 <body>
 
+<nav class="page-back">
+  <a href="../">← back to club</a>
+</nav>
+
 <article class="sheet">
 
   <header class="topline">
-    <div class="left">
+    <a class="left" href="../">
       <svg viewBox="4 20 116 74">
         <g font-family="'JetBrains Mono', monospace" fill="#15224A">
           <text x="10" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em">[</text>
@@ -141,7 +167,7 @@
         </g>
       </svg>
       <span class="wm">ai makers club</span>
-    </div>
+    </a>
     <div class="right">apr 27 · 2026</div>
   </header>
 
@@ -215,7 +241,7 @@
     <div>ai makers club · weekly workshop · est. 2026</div>
     <div class="right">
       brief 01<br>
-      <a href="../index-mono.html">← back to club</a>
+      <a href="../">← back to club</a>
     </div>
   </footer>
 
