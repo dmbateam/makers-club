@@ -288,7 +288,8 @@
     border-top: var(--border); padding: 36px 0 56px;
     display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-2);
   }
-  footer.site a { color: var(--ink); }
+  footer.site a { color: var(--ink); text-decoration: none; transition: color 120ms ease; }
+  footer.site a:hover { color: var(--riso-red-ink); }
 
   @media (max-width: 1000px) {
     .hero { grid-template-columns: 1fr; }
@@ -543,21 +544,21 @@
 
   // ---- founding-cohort counter ----
   // Reads /api/spots-sold (served by netlify/functions/spots-sold.mjs) and
-  // syncs the count text, data-sold attr, and the ascii bar dots.
+  // syncs the count text, data-sold attr, and the ascii bar glyphs.
+  // Filled slots render as U+2588 FULL BLOCK; empty as U+00B7 MIDDLE DOT.
   (async function () {
     try {
       const r = await fetch('/api/spots-sold', { cache: 'no-store' });
       if (!r.ok) return;
       const { sold, total } = await r.json();
-      const dot = '·';
       const n = Math.max(0, Math.min(total, sold | 0));
 
       document.querySelectorAll('.spots-sold').forEach(el => {
         el.textContent = String(n).padStart(2, '0');
         el.dataset.sold = String(n);
       });
-      document.querySelectorAll('.bar-filled').forEach(el => { el.textContent = dot.repeat(n); });
-      document.querySelectorAll('.bar-empty').forEach(el => { el.textContent = dot.repeat(total - n); });
+      document.querySelectorAll('.bar-filled').forEach(el => { el.textContent = '█'.repeat(n); });
+      document.querySelectorAll('.bar-empty').forEach(el => { el.textContent = '·'.repeat(total - n); });
     } catch (_) { /* offline / local preview — leave placeholder 00 */ }
   })();
 </script>
