@@ -31,6 +31,14 @@
     display: flex; align-items: center; justify-content: center;
     padding: 72px 0;
   }
+
+  footer.site {
+    border-top: var(--border); padding: 20px 0 32px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 12px; color: var(--ink-2);
+  }
+  footer.site a { color: var(--ink-2); text-decoration: none; margin-right: 14px; }
+  footer.site a:hover { color: var(--ink); }
   #paddle-form {
     width: 100%;
     max-width: 560px;
@@ -66,6 +74,15 @@
     <!-- paddle embed mounts here -->
     <div id="paddle-form" class="paddle-checkout"></div>
   </main>
+
+  <footer class="site">
+    <div>
+      <a href="/terms/">terms</a>
+      <a href="/privacy/">privacy</a>
+      <a href="/refund/">refund</a>
+    </div>
+    <div>d.MBA d.o.o. · slovenia</div>
+  </footer>
 </div>
 
 <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
