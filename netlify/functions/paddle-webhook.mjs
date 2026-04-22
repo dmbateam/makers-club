@@ -33,52 +33,81 @@ export default async (req) => {
     return new Response('method not allowed', { status: 405 });
   }
 
-  const publicKey = process.env.PADDLE_PUBLIC_KEY;
-  if (!publicKey) {
-    console.error('paddle-webhook: PADDLE_PUBLIC_KEY env var is missing');
-    return new Response('server misconfigured', { status: 500 });
+  let stage = 'init';
+  try {
+    stage = 'read_env';
+    const publicKey = process.env.PADDLE_PUBLIC_KEY;
+    if (!publicKey) {
+      return new Response(
+        JSON.stringify({ error: 'missing PADDLE_PUBLIC_KEY env var', stage }),
+        { status: 500, headers: { 'content-type': 'application/json' } }
+      );
+    }
+
+    stage = 'parse_body';
+    const body = await req.text();
+    const params = Object.fromEntries(new URLSearchParams(body));
+
+    stage = 'verify_signature';
+    if (!verifySignature(params, publicKey)) {
+      const diag = {
+        error: 'invalid signature',
+        alert_name: params.alert_name || null,
+        key_length: publicKey.length,
+        key_lines: publicKey.split('\n').length,
+        key_has_begin: publicKey.includes('-----BEGIN PUBLIC KEY-----'),
+        key_has_end: publicKey.includes('-----END PUBLIC KEY-----'),
+        key_head: publicKey.slice(0, 40).replace(/\n/g, '\\n'),
+        key_tail: publicKey.slice(-40).replace(/\n/g, '\\n'),
+        sig_present: Boolean(params.p_signature),
+        sig_prefix: (params.p_signature || '').slice(0, 20),
+      };
+      return new Response(JSON.stringify(diag, null, 2), {
+        status: 403,
+        headers: { 'content-type': 'application/json' },
+      });
+    }
+
+    stage = 'blobs_get';
+    const store = getStore('paddle-counter');
+    const current = parseInt((await store.get('sold')) || '0', 10);
+
+    stage = 'decide_update';
+    let next = current;
+    switch (params.alert_name) {
+      case 'subscription_created':
+        next = current + 1;
+        break;
+      case 'subscription_cancelled':
+        next = Math.max(0, current - 1);
+        break;
+    }
+
+    stage = 'blobs_set';
+    if (next !== current) {
+      await store.set('sold', String(next));
+    }
+
+    return new Response(
+      JSON.stringify({ ok: true, alert_name: params.alert_name, sold: next }),
+      { status: 200, headers: { 'content-type': 'application/json' } }
+    );
+  } catch (err) {
+    return new Response(
+      JSON.stringify(
+        {
+          error: 'unhandled exception',
+          stage,
+          message: err?.message || String(err),
+          name: err?.name || null,
+          stack: (err?.stack || '').split('\n').slice(0, 6).join('\n'),
+        },
+        null,
+        2
+      ),
+      { status: 500, headers: { 'content-type': 'application/json' } }
+    );
   }
-
-  const body = await req.text();
-  const params = Object.fromEntries(new URLSearchParams(body));
-
-  if (!verifySignature(params, publicKey)) {
-    const diag = {
-      error: 'invalid signature',
-      alert_name: params.alert_name || null,
-      key_length: publicKey.length,
-      key_lines: publicKey.split('\n').length,
-      key_has_begin: publicKey.includes('-----BEGIN PUBLIC KEY-----'),
-      key_has_end: publicKey.includes('-----END PUBLIC KEY-----'),
-      key_head: publicKey.slice(0, 40).replace(/\n/g, '\\n'),
-      key_tail: publicKey.slice(-40).replace(/\n/g, '\\n'),
-      sig_present: Boolean(params.p_signature),
-      sig_prefix: (params.p_signature || '').slice(0, 20),
-    };
-    return new Response(JSON.stringify(diag, null, 2), {
-      status: 403,
-      headers: { 'content-type': 'application/json' },
-    });
-  }
-
-  const store = getStore('paddle-counter');
-  const current = parseInt((await store.get('sold')) || '0', 10);
-
-  let next = current;
-  switch (params.alert_name) {
-    case 'subscription_created':
-      next = current + 1;
-      break;
-    case 'subscription_cancelled':
-      next = Math.max(0, current - 1);
-      break;
-  }
-
-  if (next !== current) {
-    await store.set('sold', String(next));
-  }
-
-  return new Response('ok', { status: 200 });
 };
 
 export const config = { path: '/api/paddle-webhook' };
