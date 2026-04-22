@@ -43,23 +43,22 @@ export default async (req) => {
   const params = Object.fromEntries(new URLSearchParams(body));
 
   if (!verifySignature(params, publicKey)) {
-    const keyLen = publicKey.length;
-    const keyHead = publicKey.slice(0, 40).replace(/\n/g, '\\n');
-    const keyTail = publicKey.slice(-40).replace(/\n/g, '\\n');
-    const hasBegin = publicKey.includes('-----BEGIN PUBLIC KEY-----');
-    const hasEnd = publicKey.includes('-----END PUBLIC KEY-----');
-    const lines = publicKey.split('\n').length;
-    console.error('paddle-webhook: signature verification FAILED', {
-      alert_name: params.alert_name,
-      key_length: keyLen,
-      key_lines: lines,
-      key_has_begin: hasBegin,
-      key_has_end: hasEnd,
-      key_head: keyHead,
-      key_tail: keyTail,
+    const diag = {
+      error: 'invalid signature',
+      alert_name: params.alert_name || null,
+      key_length: publicKey.length,
+      key_lines: publicKey.split('\n').length,
+      key_has_begin: publicKey.includes('-----BEGIN PUBLIC KEY-----'),
+      key_has_end: publicKey.includes('-----END PUBLIC KEY-----'),
+      key_head: publicKey.slice(0, 40).replace(/\n/g, '\\n'),
+      key_tail: publicKey.slice(-40).replace(/\n/g, '\\n'),
+      sig_present: Boolean(params.p_signature),
       sig_prefix: (params.p_signature || '').slice(0, 20),
+    };
+    return new Response(JSON.stringify(diag, null, 2), {
+      status: 403,
+      headers: { 'content-type': 'application/json' },
     });
-    return new Response('invalid signature', { status: 403 });
   }
 
   const store = getStore('paddle-counter');
