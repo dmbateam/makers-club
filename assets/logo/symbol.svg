@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  
+  <rect width="120" height="120" fill="none"></rect>
+  <g fill="#15224A" font-family="&#39;JetBrains Mono&#39;, ui-monospace, monospace" font-weight="700">
+    
+    <text x="10" y="86" font-size="96" letter-spacing="-0.02em">[</text>
+    
+    <rect x="44" y="36" width="30" height="54" fill="#15224A"></rect>
+    
+    <text x="78" y="86" font-size="96" letter-spacing="-0.02em">]</text>
+  </g>
+</svg>

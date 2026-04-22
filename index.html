@@ -1,0 +1,353 @@
+<!DOCTYPE html><html lang="en"><head>
+
+
+
+
+
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ai makers club — design system</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { background: var(--paper); }
+  body { margin: 0; font-family: var(--ff-mono); color: var(--ink); }
+
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+
+  /* ------- nav ------- */
+  nav.top {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0; border-bottom: var(--border);
+    position: sticky; top: 0; background: var(--paper); z-index: 10;
+  }
+  nav.top .lockup { display: flex; align-items: center; gap: 10px; }
+  nav.top .lockup svg { width: 34px; height: 22px; display: block; overflow: visible; }
+  nav.top .lockup .wm { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+  nav.top .links { display: flex; gap: 22px; font-size: 13px; }
+  nav.top .links a { color: var(--ink); text-decoration: none; padding: 4px 8px; }
+  nav.top .links a:hover { background: var(--ink); color: var(--paper); }
+
+  /* ------- status strip ------- */
+  .strip {
+    display: flex; gap: 32px; font-size: 12px; color: var(--ink-2);
+    padding: 8px 0; border-bottom: 1px solid var(--mist-2);
+  }
+  .strip .live { color: var(--riso-red); }
+
+  /* ------- hero ------- */
+  .hero {
+    padding: 96px 0 72px;
+    display: grid; grid-template-columns: 1.35fr 1fr; gap: 64px;
+    align-items: start; position: relative;
+  }
+  .hero .sticker-abs {
+    position: absolute; top: 80px; right: 0; z-index: 5;
+  }
+  .hero .weeknum { font-size: 14px; color: var(--riso-red-ink); margin-bottom: 18px;}
+  .hero h1 {
+    font-family: var(--ff-serif); font-style: italic; font-weight: 400;
+    font-size: 128px; line-height: 0.95; letter-spacing: -0.02em;
+    margin: 0; max-width: 14ch; text-transform: none;
+  }
+  .hero .sub { font-size: 19px; line-height: 1.55; margin: 36px 0 0; max-width: 46ch; color: var(--ink);}
+  .hero .ctas { margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap;}
+
+  .hero aside {
+    border: var(--border); background: var(--paper-2);
+    padding: 28px;
+    box-sizing: border-box;
+  }
+  .hero aside * { box-sizing: border-box; }
+  .hero aside .label { font-size: 12px; color: var(--ink-2); margin-bottom: 14px; }
+  .hero aside .label::before { content: "$ "; color: var(--riso-red-ink); }
+  .hero aside pre {
+    font-family: var(--ff-mono); font-size: 13px; line-height: 1.5;
+    white-space: pre; margin: 0 0 18px; letter-spacing: 0;
+    background: none; border: 0; padding: 0;
+  }
+  .hero aside .row {
+    display: flex; justify-content: space-between; padding: 6px 0;
+    border-top: 1px solid var(--mist-2); font-size: 13px;
+  }
+  .hero aside .row:first-of-type { border-top: 0;}
+  .hero aside .row b { font-weight: 700; }
+  .hero aside .action { margin-top: 18px; }
+  .hero aside .action .btn { width: 100%; justify-content: center; }
+
+  /* ------- section header ------- */
+  .section-head {
+    border-top: var(--border); padding: 28px 0 20px;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .section-head .kicker { font-size: 12px; color: var(--ink-2); letter-spacing: 0; }
+  .section-head .kicker::before { content: "§ "; color: var(--riso-red-ink); }
+  .section-head h2 {
+    font-family: var(--ff-serif); font-style: italic; font-weight: 400;
+    font-size: 56px; line-height: 1; letter-spacing: -0.02em;
+    margin: 10px 0 0; text-transform: none;
+  }
+  .section-head .right { font-size: 13px; color: var(--ink-2); align-self: flex-end;}
+
+  /* ------- rhythm / 3-step ------- */
+  .rhythm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0 96px;}
+  .rhythm .card { position: relative;}
+  .rhythm .num {
+    font-family: var(--ff-mono); font-size: 56px; font-weight: 700;
+    color: var(--riso-red); line-height: 1; letter-spacing: -0.03em;
+  }
+  .rhythm h3 { font-family: var(--ff-mono); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin: 16px 0 10px;}
+  .rhythm p  { font-size: 14px; line-height: 1.55; margin: 0; color: var(--ink);}
+
+  /* ------- video placeholder (red band) ------- */
+  .video-placeholder {
+    margin: 0 calc(50% - 50vw) 72px;
+    background: var(--riso-red);
+    padding: 48px calc(50vw - 50%);
+    position: relative;
+  }
+  .video-placeholder .meta {
+    position: absolute; top: 20px; left: 32px;
+    font-family: var(--ff-mono); font-size: 12px;
+    color: var(--paper); opacity: 0.85;
+    letter-spacing: 0.04em;
+  }
+  .video-placeholder .meta::before { content: "~/"; opacity: 0.6; }
+  .video-placeholder .tag {
+    position: absolute; top: 20px; right: 32px;
+    font-family: var(--ff-mono); font-size: 12px;
+    color: var(--paper); opacity: 0.85;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .video-placeholder .frame {
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    position: relative;
+    display: grid; place-items: center;
+    background: rgba(0,0,0,0.08);
+    border: 1.5px solid rgba(255,255,255,0.3);
+  }
+  .video-placeholder .play {
+    width: 72px; height: 72px;
+    border: 1.5px solid var(--paper);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    color: var(--paper);
+  }
+  .video-placeholder .play svg { display: block; }
+
+  /* ------- full-width red band (quote — retained if reused elsewhere) ------- */
+  .red-band-full {
+    margin: 0 calc(50% - 50vw); padding: 36px calc(50vw - 50%);
+    background: var(--riso-red); color: var(--paper);
+    display: flex; justify-content: space-between; align-items: center; gap: 48px;
+    font-size: 18px;
+  }
+  .red-band-full .quote { font-family: var(--ff-serif); font-style: italic; font-size: 36px; line-height: 1.1; letter-spacing: -0.02em; max-width: 26ch;}
+  .red-band-full .attr { font-family: var(--ff-mono); font-size: 13px; opacity: 0.9;}
+
+  /* ------- manifesto ------- */
+  .manifesto { padding: 96px 0 48px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 64px;}
+  .manifesto .kicker { font-size: 12px; color: var(--ink-2);}
+  .manifesto .kicker::before { content: "§ "; color: var(--riso-red-ink); }
+  .manifesto h2 {
+    font-family: var(--ff-serif); font-style: italic; font-weight: 400;
+    font-size: 56px; line-height: 1; letter-spacing: -0.02em; margin: 12px 0 0;
+    text-transform: none;
+  }
+  .manifesto ol { list-style: none; padding: 0; margin: 0; counter-reset: m;}
+  .manifesto ol li {
+    counter-increment: m; padding: 20px 0; border-top: 1px solid var(--mist-2);
+    display: grid; grid-template-columns: 60px 1fr; gap: 16px; align-items: baseline;
+  }
+  .manifesto ol li::before {
+    content: counter(m, decimal-leading-zero);
+    font-family: var(--ff-mono); color: var(--riso-red); font-weight: 700; font-size: 14px;
+  }
+  .manifesto ol li p { margin: 0; font-size: 18px; line-height: 1.45; }
+  .manifesto ol li:last-child { border-bottom: 1px solid var(--mist-2);}
+
+  /* ------- apply ------- */
+  .apply { padding: 72px 0 96px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;}
+  .apply h2 {
+    font-family: var(--ff-serif); font-style: italic; font-weight: 400;
+    font-size: 88px; line-height: 0.95; letter-spacing: -0.02em; margin: 0;
+    max-width: 12ch; text-transform: none;
+  }
+  .apply .form { border: var(--border); padding: 32px; background: var(--paper);}
+  .apply .form label { font-size: 11px; color: var(--ink-2); display: block; margin-bottom: 6px;}
+  .apply .form .field { margin-bottom: 18px;}
+  .apply .form .btn { width: 100%; justify-content: center;}
+  .apply .form .note { font-size: 12px; color: var(--ink-2); margin-top: 14px; line-height: 1.5;}
+
+  /* ------- footer ------- */
+  footer.site {
+    border-top: var(--border); padding: 36px 0 56px;
+    display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-2);
+  }
+  footer.site a { color: var(--ink); }
+
+  @media (max-width: 1000px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 72px; }
+    .rhythm { grid-template-columns: 1fr 1fr; }
+    .manifesto, .apply { grid-template-columns: 1fr; }
+    .red-band-full { flex-direction: column; align-items: flex-start; }
+    .apply h2 { font-size: 56px; }
+  }
+</style>
+</head>
+<body data-cc-id="cc-1" style="cursor: crosshair;">
+
+<div class="container" data-cc-id="cc-2">
+
+  <!-- ───────── nav ───────── -->
+  <nav class="top" data-cc-id="cc-4">
+    <div class="lockup">
+      <svg viewBox="4 20 116 74">
+        <g font-family="'JetBrains Mono', monospace" fill="#15224A">
+          <text x="10" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em">[</text>
+          <rect x="44" y="36" width="30" height="54"></rect>
+          <text x="78" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em" data-cc-id="cc-3">]</text>
+        </g>
+      </svg>
+      <span class="wm">ai makers club</span>
+    </div>
+    <div class="links">
+      <a href="#rhythm">rhythm</a>
+      <a href="#manifesto">manifesto</a>
+      <a href="templates/brief/weekly-brief.html">this week →</a>
+    </div>
+    <a class="btn btn--ghost" href="#apply" style="padding: 8px 14px; font-size: 13px;" data-cc-id="cc-27">join →</a>
+  </nav>
+
+  <!-- ───────── hero ───────── -->
+  <section class="hero" data-cc-id="cc-5">
+    <div class="sticker-abs" data-cc-id="cc-16">
+      <div class="spec-sticker" data-cc-id="cc-17" style="">
+        est · 2026<br>
+        the club is open<br>
+        50 makers
+      </div>
+    </div>
+
+    <div data-cc-id="cc-1">
+      <div class="weeknum" data-cc-id="cc-6">※ a weekly workshop for creatives</div>
+      <h1 data-cc-id="cc-7" style="">learn AI&nbsp;<br>by making</h1>
+      <p class="sub" data-cc-id="cc-1" style=""><span style="letter-spacing: -0.16px;" data-cc-id="cc-39">the best way to learn AI is to make stuff with it. e</span>very monday a new brief drops. you build during the week. every sunday we show what we shipped.&nbsp;</p>
+      <div class="ctas" data-cc-id="cc-2">
+        <a class="btn" href="#apply">join the club <span class="cursor">▌</span></a>
+      </div>
+    </div>
+
+    <aside data-cc-id="cc-8">
+      <div class="label" data-cc-id="cc-18">this week</div>
+<pre data-cc-id="cc-19" style="">┌─ wk 001 ─────────────────┐
+│ build a tool             │
+│ you'll actually use.     │
+└──────────────────────────┘</pre>
+      <div class="row" data-cc-id="cc-14"><span>drop</span><b data-cc-id="cc-15" style="">mon · 09:00 GMT</b></div>
+      <div class="row" data-cc-id="cc-12"><span>ship</span><b data-cc-id="cc-13" style="">sun · 24:00 GMT</b></div>
+      <div class="row" data-cc-id="cc-20"><span data-cc-id="cc-3">building</span><b data-cc-id="cc-21" style="">50 makers</b></div>
+      <div class="action"><a class="btn btn--accent" href="templates/brief/weekly-brief.html" data-cc-id="cc-38" style="">read the brief →</a></div>
+    </aside>
+  </section>
+
+  <!-- ───────── video placeholder ───────── -->
+  <div class="video-placeholder" aria-label="video placeholder">
+    <div class="meta">video/intro.mp4</div>
+    <div class="tag">placeholder</div>
+    <div class="frame">
+      <div class="play" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────── rhythm ───────── -->
+  <section id="rhythm">
+    <div class="section-head">
+      <div>
+        <div class="kicker">01 — the rhythm</div>
+        <h2 data-cc-id="cc-30" style="">one week, three beats.</h2>
+      </div>
+      <div class="right">7 days · mon → sun</div>
+    </div>
+    <div class="rhythm">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>monday · drop</h3>
+        <p data-cc-id="cc-4" style="">a new brief lands at 09:00 GMT. one page. one specific challenge. with just enough guidance so you can get going.&nbsp;</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>the week · build</h3>
+        <p data-cc-id="cc-5" style="">you pick your stack, scope it to something shippable, and make. if you get stuck, get help by club members.</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>sunday · ship</h3>
+        <p data-cc-id="cc-6" style="">post what you made by 24:00 GMT. review what others have made. teach, learn, and connect.&nbsp;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── manifesto ───────── -->
+  <section id="manifesto" class="manifesto" data-cc-id="cc-16">
+    <div data-cc-id="cc-26">
+      <div class="kicker" data-cc-id="cc-28" style="">02 — the manifesto</div>
+      <h2 data-cc-id="cc-29" style="">one club.<br>five "rules".</h2>
+      <p style="font-size: 14px; color: var(--ink-2); margin-top: 24px; line-height: 1.55; max-width: 34ch;" data-cc-id="cc-10">five rules. read them aloud the first monday of every month.</p>
+    </div>
+    <ol>
+      <li><p data-cc-id="cc-9" style="">you do not talk about the club.</p></li>
+      <li><p data-cc-id="cc-7" style="">bring what you know. borrow what you don't.</p></li>
+      <li><p data-cc-id="cc-8" style="">ship beats polish. sunday beats someday.</p></li>
+      <li data-cc-id="cc-15"><p data-cc-id="cc-11" style=""><span style="letter-spacing: -0.16px;" data-cc-id="cc-14">make the thing you wanted to exist on monday morning.</span></p></li>
+      <li><p data-cc-id="cc-12" style=""><span style="letter-spacing: -0.16px;" data-cc-id="cc-13">see rule number 01.</span></p></li>
+    </ol>
+  </section>
+
+  <!-- ───────── apply ───────── -->
+  <section id="apply" class="apply" data-cc-id="cc-17">
+    <h2 data-cc-id="cc-25">apply to join the room.</h2>
+    <form class="form" onsubmit="event.preventDefault()" data-cc-id="cc-18">
+      <div class="field" data-cc-id="cc-20">
+        <label data-cc-id="cc-19">$ your name</label>
+        <input class="input" placeholder="dani ortega" data-cc-id="cc-21">
+      </div>
+      <div class="field" data-cc-id="cc-23">
+        <label data-cc-id="cc-22">$ what you make</label>
+        <input class="input" placeholder="illustrator · portland" data-cc-id="cc-24">
+      </div>
+      <div class="field">
+        <label>$ one thing you want to build with AI</label>
+        <textarea class="textarea" rows="2" placeholder="a tool that..."></textarea>
+      </div>
+      <button class="btn btn--accent" type="submit">send application <span class="cursor">▌</span></button>
+      <div class="note">we read every one. if it's a fit, you'll hear from us before the next monday drop.</div>
+    </form>
+  </section>
+
+</div>
+
+<!-- ───────── footer ───────── -->
+<div class="container">
+  <footer class="site">
+    <div>ai makers club · est. 2026 · built on mondays, shipped on sundays</div>
+    <div>
+      <a href="README.md">README</a> &nbsp;·&nbsp;
+      <a href="templates/brief/weekly-brief.html">week 014</a> &nbsp;·&nbsp;
+      <a href="mailto:hello@makersclub.ai">hello@makersclub.ai</a>
+    </div>
+  </footer>
+</div>
+
+
+
+</body></html>
