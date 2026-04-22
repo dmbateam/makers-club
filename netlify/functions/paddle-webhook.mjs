@@ -14,6 +14,19 @@ function phpSerialize(obj) {
   return out;
 }
 
+// Some env-var UIs collapse PEM newlines into spaces. Reconstruct a
+// well-formed PEM (BEGIN/END on their own lines, base64 wrapped to 64 chars).
+function normalizePem(input) {
+  if (!input) return input;
+  if (input.split('\n').length > 3) return input;
+  const m = input.match(/-----BEGIN ([A-Z ]+)-----([\s\S]*?)-----END \1-----/);
+  if (!m) return input;
+  const type = m[1];
+  const body = m[2].replace(/\s+/g, '');
+  const wrapped = body.match(/.{1,64}/g)?.join('\n') || body;
+  return `-----BEGIN ${type}-----\n${wrapped}\n-----END ${type}-----\n`;
+}
+
 function verifySignature(params, publicKey) {
   const { p_signature, ...rest } = params;
   if (!p_signature) return false;
@@ -22,7 +35,7 @@ function verifySignature(params, publicKey) {
   verifier.update(serialized);
   verifier.end();
   try {
-    return verifier.verify(publicKey, p_signature, 'base64');
+    return verifier.verify(normalizePem(publicKey), p_signature, 'base64');
   } catch {
     return false;
   }
@@ -50,15 +63,16 @@ export default async (req) => {
 
     stage = 'verify_signature';
     if (!verifySignature(params, publicKey)) {
+      const normalized = normalizePem(publicKey);
       const diag = {
         error: 'invalid signature',
         alert_name: params.alert_name || null,
         key_length: publicKey.length,
         key_lines: publicKey.split('\n').length,
+        normalized_lines: normalized.split('\n').length,
+        normalized_length: normalized.length,
         key_has_begin: publicKey.includes('-----BEGIN PUBLIC KEY-----'),
         key_has_end: publicKey.includes('-----END PUBLIC KEY-----'),
-        key_head: publicKey.slice(0, 40).replace(/\n/g, '\\n'),
-        key_tail: publicKey.slice(-40).replace(/\n/g, '\\n'),
         sig_present: Boolean(params.p_signature),
         sig_prefix: (params.p_signature || '').slice(0, 20),
       };
