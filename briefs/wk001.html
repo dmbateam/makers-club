@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>week 001 — build a skill.md that saves an hour a week · ai makers club</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html, body { background: var(--paper); }
+  body { margin: 0; padding: 64px 32px; font-family: var(--ff-mono); color: var(--ink); }
+
+  .sheet {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: var(--border);
+    padding: 48px 56px 40px;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .topline {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--ff-mono); font-size: 12px; color: var(--ink-2);
+  }
+  .topline .left { display: flex; align-items: center; gap: 10px; }
+  .topline .left svg { width: 34px; height: 22px; display: block; overflow: visible; }
+  .topline .left .wm {
+    font-family: var(--ff-mono); font-weight: 700; font-size: 18px;
+    color: var(--ink); letter-spacing: -0.02em; line-height: 1;
+  }
+  .topline .right { text-align: right; }
+
+  .title-block { margin-top: 40px; }
+  .weeknum {
+    font-family: var(--ff-mono); font-size: 13px;
+    color: var(--riso-red-ink); font-weight: 500; letter-spacing: 0;
+  }
+  .title {
+    font-family: var(--ff-mono); font-weight: 700;
+    font-size: 44px; line-height: 1; letter-spacing: -0.04em;
+    margin: 12px 0 0;
+  }
+  .title small {
+    font-family: var(--ff-mono); font-weight: 400; font-size: 14px;
+    color: var(--ink-2); display: block; margin-top: 18px;
+    letter-spacing: 0; line-height: 1.6;
+  }
+
+  .rule { border: 0; border-top: var(--border); margin: 32px 0 24px; }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .col h3 {
+    font-family: var(--ff-mono); font-size: 16px; font-weight: 700;
+    margin: 0 0 12px; letter-spacing: -0.01em; text-transform: none;
+  }
+  .col p { font-size: 14px; line-height: 1.55; margin: 0 0 12px; color: var(--ink); }
+  .col ul { padding: 0; margin: 0; list-style: none; font-size: 14px; line-height: 1.7; }
+  .col ul li { padding-left: 1.4em; text-indent: -1.4em; }
+  .col ul li::before { content: "◆ "; color: var(--riso-red); }
+
+  .spec-box {
+    font-family: var(--ff-mono); font-size: 13px;
+    white-space: pre; color: var(--ink); line-height: 1.45;
+    border: var(--border); padding: 16px 24px; margin-top: 28px;
+    letter-spacing: 0; background: var(--paper-2);
+    overflow-x: auto;
+  }
+
+  .resources { margin-top: 32px; }
+  .resources h3 {
+    font-family: var(--ff-mono); font-size: 16px; font-weight: 700;
+    margin: 0 0 8px; text-transform: none;
+  }
+  .resources ul { list-style: none; padding: 0; margin: 0; }
+  .resources li {
+    display: flex; gap: 12px;
+    padding: 12px 0; border-top: 1px solid var(--mist-2);
+    font-size: 14px; line-height: 1.55;
+  }
+  .resources li:last-child { border-bottom: 1px solid var(--mist-2); }
+  .resources .label {
+    flex: 0 0 84px;
+    font-family: var(--ff-mono); font-size: 11px;
+    color: var(--ink-2); letter-spacing: 0.04em; text-transform: uppercase;
+    padding-top: 3px;
+  }
+  .resources .label::before { content: "→ "; color: var(--riso-red); }
+  .resources .body { flex: 1; min-width: 0; }
+  .resources a { color: var(--ink); }
+
+  .prompt {
+    margin-top: 32px;
+    padding: 20px 24px;
+    border: var(--border);
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  }
+  .prompt .p-label {
+    font-family: var(--ff-mono); font-size: 12px; color: var(--ink-2);
+  }
+  .prompt .p-text {
+    font-family: var(--ff-mono); font-weight: 700;
+    font-size: 22px; line-height: 1.1; margin-top: 4px;
+    letter-spacing: -0.02em;
+  }
+  .prompt .btn { flex: 0 0 auto; }
+  .prompt .btn .cursor { display: inline-block; animation: blink 1s step-end infinite; }
+
+  .footer {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-top: 32px; padding-top: 16px;
+    border-top: 1px solid var(--mist-2);
+    font-family: var(--ff-mono); font-size: 12px; color: var(--ink-2);
+  }
+  .footer .right { text-align: right; }
+  .footer .right a { color: var(--ink); }
+
+  @media (max-width: 720px) {
+    body { padding: 32px 16px; }
+    .sheet { padding: 32px 24px; }
+    .grid { grid-template-columns: 1fr; }
+    .title { font-size: 36px; }
+    .prompt { flex-direction: column; align-items: flex-start; }
+    .prompt .btn { width: 100%; justify-content: center; box-sizing: border-box; }
+    .resources li { flex-direction: column; gap: 4px; }
+    .resources .label { flex: 0 0 auto; padding-top: 0; }
+  }
+</style>
+</head>
+<body>
+
+<article class="sheet">
+
+  <header class="topline">
+    <div class="left">
+      <svg viewBox="4 20 116 74">
+        <g font-family="'JetBrains Mono', monospace" fill="#15224A">
+          <text x="10" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em">[</text>
+          <rect x="44" y="36" width="30" height="54"/>
+          <text x="78" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em">]</text>
+        </g>
+      </svg>
+      <span class="wm">ai makers club</span>
+    </div>
+    <div class="right">apr 27 · 2026</div>
+  </header>
+
+  <section class="title-block">
+    <div class="weeknum">※ week 001 — brief</div>
+    <h1 class="title">build a skill.md that<br>saves you an hour a week.
+      <small>pick one task you actually do. write a skill.md that does it for you. the bar: next monday, you reach for it without thinking.</small>
+    </h1>
+  </section>
+
+  <hr class="rule"/>
+
+  <div class="grid">
+    <div class="col">
+      <h3>◆ what you could make</h3>
+      <p>a skill is a small, repeatable recipe — one task, one output, one prompt away. some examples to get the brain going:</p>
+      <ul>
+        <li>ux-reviewer — a screen or flow → a usability check</li>
+        <li>competitor research — name an industry, get a comprehensive report</li>
+        <li>expense report — receipts → a categorized table shared with finance</li>
+        <li>inbox triage — 50 emails → 5 that matter, drafts ready</li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <h3>◆ what you'll submit</h3>
+      <p>when you are done, drop your result in <b>#shipped</b> including:</p>
+      <ul>
+        <li>a 60-second demo — or a screenshot + a few lines</li>
+        <li>your skill.md (only if you're comfortable — strip api keys first)</li>
+        <li>what your manual workflow looked like before</li>
+      </ul>
+    </div>
+  </div>
+
+  <pre class="spec-box">┌─ brief spec ─────────────────────────────────────────────┐
+│ drop     mon  apr 27  09:00 GMT                          │
+│ ship     sun  may 03  24:00 GMT                          │
+│ review   sun  may 03  in #shipped                        │
+│ next     wk 002 — tba sunday                             │
+└──────────────────────────────────────────────────────────┘</pre>
+
+  <section class="resources">
+    <h3>◆ resources</h3>
+    <ul>
+      <li>
+        <span class="label">video</span>
+        <span class="body"><a href="https://youtu.be/NlVxAy05KNA?si=8_ckHad7XA89SZfy&amp;t=14455" target="_blank" rel="noopener">claude code: how to build a skill (jump to the moment)</a></span>
+      </li>
+      <li>
+        <span class="label">example</span>
+        <span class="body"><a href="https://github.com/anthropics/skills/tree/main/skills/skill-creator" target="_blank" rel="noopener">anthropic's skill-creator (a skill that builds skills — fork it)</a></span>
+      </li>
+      <li>
+        <span class="label">docs</span>
+        <span class="body"><a href="https://claude.com/skills" target="_blank" rel="noopener">claude skills documentation</a></span>
+      </li>
+      <li>
+        <span class="label">tip</span>
+        <span class="body">and: ask claude code or codex how to build it. they're better at this than you'd think.</span>
+      </li>
+    </ul>
+  </section>
+
+  <div class="prompt">
+    <div class="p-text">what skill will you build?</div>
+    <a class="btn btn--accent" href="#">drop it in #shipped <span class="cursor">▌</span></a>
+  </div>
+
+  <footer class="footer">
+    <div>ai makers club · weekly workshop · est. 2026</div>
+    <div class="right">
+      brief 01<br>
+      <a href="../index-mono.html">← back to club</a>
+    </div>
+  </footer>
+
+</article>
+
+</body>
+</html>

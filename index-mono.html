@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="colors_and_type.css">
 <style>
   html, body { background: var(--paper); }
+  html { scroll-padding-top: 88px; }
   body { margin: 0; font-family: var(--ff-mono); color: var(--ink); }
 
   .container { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
@@ -22,13 +23,25 @@
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 0; border-bottom: var(--border);
     position: sticky; top: 0; background: var(--paper); z-index: 10;
+    transition: background 120ms ease, border-color 120ms ease;
   }
   nav.top .lockup { display: flex; align-items: center; gap: 10px; }
   nav.top .lockup svg { width: 34px; height: 22px; display: block; overflow: visible; }
-  nav.top .lockup .wm { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+  nav.top .lockup .wm { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; transition: color 120ms ease; }
+  nav.top .nav-right { display: flex; align-items: center; gap: 24px; }
   nav.top .links { display: flex; gap: 22px; font-size: 13px; }
-  nav.top .links a { color: var(--ink); text-decoration: none; padding: 4px 8px; }
+  nav.top .links a { color: var(--ink); text-decoration: none; padding: 4px 8px; transition: background 120ms ease, color 120ms ease; }
   nav.top .links a:hover { background: var(--ink); color: var(--paper); }
+  nav.top .lockup svg g { transition: fill 120ms ease; }
+
+  /* nav red mode — when scrolling past a red section */
+  nav.top.nav--red { background: var(--riso-red); border-bottom-color: var(--riso-red); }
+  nav.top.nav--red .lockup .wm { color: var(--paper); }
+  nav.top.nav--red .lockup svg g { fill: var(--paper); }
+  nav.top.nav--red .links a { color: var(--paper); }
+  nav.top.nav--red .links a:hover { background: var(--paper); color: var(--riso-red); }
+  nav.top.nav--red .btn--ghost { background: var(--riso-red); color: var(--paper); border-color: var(--paper); }
+  nav.top.nav--red .btn--ghost:hover { background: var(--paper); color: var(--riso-red); border-color: var(--paper); }
 
   /* ------- status strip ------- */
   .strip {
@@ -42,9 +55,6 @@
     padding: 96px 0 72px;
     display: grid; grid-template-columns: 1.35fr 1fr; gap: 64px;
     align-items: start; position: relative;
-  }
-  .hero .sticker-abs {
-    position: absolute; top: 80px; right: 0; z-index: 5;
   }
   .hero .weeknum { font-size: 14px; color: var(--riso-red-ink); margin-bottom: 18px;}
   .hero h1 {
@@ -91,15 +101,62 @@
   }
   .section-head .right { font-size: 13px; color: var(--ink-2); align-self: flex-end;}
 
-  /* ------- rhythm / 3-step ------- */
-  .rhythm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0 48px;}
-  .rhythm .card { position: relative;}
-  .rhythm .num {
-    font-family: var(--ff-mono); font-size: 56px; font-weight: 700;
-    color: var(--riso-red); line-height: 1; letter-spacing: -0.03em;
+  /* ------- rhythm / week-card ------- */
+  .week-card {
+    margin: 40px 0 48px;
+    border: var(--border);
+    background: var(--paper);
   }
-  .rhythm h3 { font-family: var(--ff-mono); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin: 16px 0 10px;}
-  .rhythm p  { font-size: 14px; line-height: 1.55; margin: 0; color: var(--ink);}
+  .week-head {
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--mist-2);
+    font-family: var(--ff-mono); font-size: 12px;
+    color: var(--ink-2); letter-spacing: 0;
+  }
+  .week-strip {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    gap: 8px; padding: 24px 24px 12px;
+  }
+  .day {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding: 14px 6px; border: 1px solid var(--mist-2);
+    text-align: center;
+  }
+  .day.d-drop, .day.d-ship {
+    background: var(--riso-red); color: var(--paper); border-color: var(--riso-red);
+  }
+  .d-name {
+    font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+    font-family: var(--ff-mono);
+  }
+  .d-dot { font-size: 20px; line-height: 1; color: var(--ink); opacity: 0.3; }
+  .day.d-drop .d-dot, .day.d-ship .d-dot { color: var(--paper); opacity: 1; }
+  .week-phases {
+    display: grid; grid-template-columns: 1fr 5fr 1fr;
+    gap: 8px; padding: 0 24px 20px;
+  }
+  .ph {
+    font-family: var(--ff-mono); font-size: 12px;
+    text-align: center; padding: 4px 0;
+  }
+  .ph-drop, .ph-ship { color: var(--riso-red-ink); font-weight: 700; }
+  .ph-build { color: var(--ink-2); letter-spacing: 0.04em; }
+  .week-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: var(--border);
+  }
+  .w-card { padding: 24px; border-right: 1px solid var(--mist-2); }
+  .w-card:last-child { border-right: 0; }
+  .w-card .num {
+    font-family: var(--ff-mono); font-size: 40px; font-weight: 700;
+    color: var(--riso-red); line-height: 1; margin-bottom: 14px;
+    letter-spacing: -0.03em;
+  }
+  .w-card h3 {
+    font-family: var(--ff-mono); font-size: 18px; font-weight: 700;
+    letter-spacing: -0.02em; margin: 0 0 10px;
+  }
+  .w-card p { font-size: 13.5px; line-height: 1.55; margin: 0; color: var(--ink); }
 
   /* ------- video placeholder (red band) ------- */
   .video-placeholder {
@@ -127,19 +184,14 @@
     max-width: 720px;
     aspect-ratio: 16 / 9;
     margin: 0 auto;
-    position: relative;
-    display: grid; place-items: center;
     background: rgba(0,0,0,0.08);
     border: 1.5px solid rgba(255,255,255,0.3);
+    overflow: hidden;
   }
-  .video-placeholder .play {
-    width: 72px; height: 72px;
-    border: 1.5px solid var(--paper);
-    border-radius: 50%;
-    display: grid; place-items: center;
-    color: var(--paper);
+  .video-placeholder .frame iframe {
+    width: 100%; height: 100%;
+    display: block; border: 0;
   }
-  .video-placeholder .play svg { display: block; }
 
   /* ------- full-width red band (quote — retained if reused elsewhere) ------- */
   .red-band-full {
@@ -190,15 +242,20 @@
     margin-bottom: 22px;
   }
   .join .card-join .progress-bar {
-    font-family: var(--ff-mono); font-size: 16px;
-    color: var(--ink); letter-spacing: 2px;
-    margin: 0 0 10px; overflow: hidden; white-space: nowrap;
+    font-family: var(--ff-mono);
+    font-size: clamp(9px, 1.5vw, 16px);
+    letter-spacing: clamp(0px, 0.18vw, 2px);
+    color: var(--ink);
+    margin: 0 0 10px;
+    overflow: hidden;
+    white-space: nowrap;
     line-height: 1;
   }
   .join .card-join .bar-filled { color: var(--riso-red); }
   .join .card-join .bar-empty { color: var(--ink); opacity: 0.25; }
   .join .card-join .progress-meta {
     display: flex; justify-content: space-between; align-items: baseline;
+    gap: 12px; flex-wrap: wrap;
     font-size: 13px;
   }
   .join .card-join .progress-meta .live {
@@ -235,7 +292,9 @@
   @media (max-width: 1000px) {
     .hero { grid-template-columns: 1fr; }
     .hero h1 { font-size: 56px; }
-    .rhythm { grid-template-columns: 1fr 1fr; }
+    .week-cards { grid-template-columns: 1fr; }
+    .w-card { border-right: 0; border-bottom: 1px solid var(--mist-2); }
+    .w-card:last-child { border-bottom: 0; }
     .join { grid-template-columns: 1fr; }
     .whowhere .grid, .faq .list { grid-template-columns: 1fr; }
     .red-band-full { flex-direction: column; align-items: flex-start; }
@@ -259,55 +318,50 @@
       </svg>
       <span class="wm">ai makers club</span>
     </div>
-    <div class="links">
-      <a href="#rhythm">rhythm</a>
-      <a href="#who">the club</a>
-      <a href="#faq">faq</a>
-      <a href="templates/brief/weekly-brief.html">this week →</a>
+    <div class="nav-right">
+      <div class="links">
+        <a href="#rhythm">rhythm</a>
+        <a href="#who">who &amp; where</a>
+        <a href="#faq">faq</a>
+      </div>
+      <a class="btn btn--ghost" href="#join" style="padding: 8px 14px; font-size: 13px;" data-cc-id="cc-27">join →</a>
     </div>
-    <a class="btn btn--ghost" href="#join" style="padding: 8px 14px; font-size: 13px;" data-cc-id="cc-27">join →</a>
   </nav>
 
   <!-- ───────── hero ───────── -->
   <section class="hero" data-cc-id="cc-5">
-    <div class="sticker-abs" data-cc-id="cc-16">
-      <div class="spec-sticker" data-cc-id="cc-17" style="">
-        est · 2026<br>
-        the club is open<br>
-        50 makers
-      </div>
-    </div>
-
     <div data-cc-id="cc-1">
-      <div class="weeknum" data-cc-id="cc-6">※ a weekly workshop for creatives</div>
-      <h1 data-cc-id="cc-7" style="">learn AI&nbsp;<br>by making</h1>
-      <p class="sub">a weekly workshop for people who'd rather ship than watch tutorials.</p>
+      <div class="weeknum" data-cc-id="cc-6">※ starting april 27th · 50 founding spots</div>
+      <h1 data-cc-id="cc-7" style="">learn AI&nbsp;<br>by making.</h1>
+      <p class="sub">a weekly workshop for creatives who'd rather ship than watch tutorials.</p>
       <div class="ctas" data-cc-id="cc-2">
         <a class="btn" href="#join">join the club <span class="cursor">▌</span></a>
       </div>
     </div>
 
     <aside data-cc-id="cc-8">
-      <div class="label" data-cc-id="cc-18">this week</div>
-<pre data-cc-id="cc-19" style="">┌─ wk 001 ─────────────────┐
-│ build a tool             │
-│ you'll actually use.     │
-└──────────────────────────┘</pre>
-      <div class="row" data-cc-id="cc-14"><span>drop</span><b data-cc-id="cc-15" style="">mon · 09:00 GMT</b></div>
-      <div class="row" data-cc-id="cc-12"><span>ship</span><b data-cc-id="cc-13" style="">sun · 24:00 GMT</b></div>
-      <div class="row" data-cc-id="cc-20"><span data-cc-id="cc-3">building</span><b data-cc-id="cc-21" style="">50 makers</b></div>
-      <div class="action"><a class="btn btn--accent" href="templates/brief/weekly-brief.html" data-cc-id="cc-38" style="">read the brief →</a></div>
+      <div class="label" data-cc-id="cc-18">next week</div>
+<pre data-cc-id="cc-19" style="">┌─ wk001 ────────────────────┐
+│ build a skill.md that      │
+│ saves you an hour a week.  │
+└────────────────────────────┘</pre>
+      <div class="row"><span>starts</span><b>mon april 27th · 09:00 GMT</b></div>
+      <div class="row"><span>due</span><b>sun may 3rd · 24:00 GMT</b></div>
+      <div class="row"><span>makers</span><b>50</b></div>
+      <div class="action"><a class="btn btn--accent" href="briefs/wk001.html">read the brief →</a></div>
     </aside>
   </section>
 
-  <!-- ───────── video placeholder ───────── -->
-  <div class="video-placeholder" aria-label="video placeholder">
+  <!-- ───────── intro video ───────── -->
+  <div class="video-placeholder" aria-label="intro video">
     <div class="meta">video/intro.mp4</div>
-    <div class="tag">placeholder</div>
     <div class="frame">
-      <div class="play" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </div>
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/CHV7Jzaq6R4"
+        title="ai makers club intro"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
     </div>
   </div>
 
@@ -316,25 +370,42 @@
     <div class="section-head">
       <div>
         <div class="kicker">01 — the rhythm</div>
-        <h2 data-cc-id="cc-30" style="">one week, three beats.</h2>
+        <h2>one week, three beats.</h2>
       </div>
       <div class="right"></div>
     </div>
-    <div class="rhythm">
-      <div class="card">
-        <div class="num">01</div>
-        <h3>monday · drop</h3>
-        <p data-cc-id="cc-4" style="">a new brief lands at 09:00 GMT. one page. one specific challenge. with just enough guidance so you can get going.&nbsp;</p>
+    <div class="week-card">
+      <div class="week-head">~/week.md</div>
+      <div class="week-strip">
+        <div class="day d-drop"><span class="d-name">mon</span><span class="d-dot">●</span></div>
+        <div class="day"><span class="d-name">tue</span><span class="d-dot">·</span></div>
+        <div class="day"><span class="d-name">wed</span><span class="d-dot">·</span></div>
+        <div class="day"><span class="d-name">thu</span><span class="d-dot">·</span></div>
+        <div class="day"><span class="d-name">fri</span><span class="d-dot">·</span></div>
+        <div class="day"><span class="d-name">sat</span><span class="d-dot">·</span></div>
+        <div class="day d-ship"><span class="d-name">sun</span><span class="d-dot">●</span></div>
       </div>
-      <div class="card">
-        <div class="num">02</div>
-        <h3>the week · build</h3>
-        <p data-cc-id="cc-5" style="">you pick your stack, scope it to something shippable, and make. if you get stuck, get help by club members.</p>
+      <div class="week-phases">
+        <div class="ph ph-drop">drop</div>
+        <div class="ph ph-build">←──── build ────→</div>
+        <div class="ph ph-ship">ship</div>
       </div>
-      <div class="card">
-        <div class="num">03</div>
-        <h3>sunday · ship</h3>
-        <p data-cc-id="cc-6" style="">post what you made by 24:00 GMT. review what others have made. teach, learn, and connect.&nbsp;</p>
+      <div class="week-cards">
+        <div class="w-card">
+          <div class="num">01</div>
+          <h3>monday · drop</h3>
+          <p>each monday, a new brief lands at 09:00 GMT. one page. one specific challenge. with just enough guidance so you can get going.</p>
+        </div>
+        <div class="w-card">
+          <div class="num">02</div>
+          <h3>the week · build</h3>
+          <p>you pick your stack, scope it to something shippable, and make. if you get stuck, get help from club members.</p>
+        </div>
+        <div class="w-card">
+          <div class="num">03</div>
+          <h3>sunday · ship</h3>
+          <p>post what you made by 24:00 GMT. review what others have made. teach, learn, and connect.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -368,7 +439,7 @@
   <section id="join" class="join">
     <h2>join the first 50.</h2>
     <div class="card-join">
-      <div class="kicker">founding cohort · limited to 50</div>
+      <div class="kicker">founding members · limited to 50</div>
       <div class="price">$49<span class="per"> / month</span></div>
       <p class="tagline">this price never goes up for you.</p>
       <div class="progress">
@@ -437,10 +508,32 @@
 <!-- ───────── footer ───────── -->
 <div class="container">
   <footer class="site">
-    <div>ai makers club · est. 2026 · built on mondays, shipped on sundays</div>
+    <div>ai makers club · est. 2026 · briefed on mondays, shipped on sundays</div>
   </footer>
 </div>
 
 
+
+<script>
+  (function () {
+    const nav = document.querySelector('nav.top');
+    const redZones = document.querySelectorAll('.video-placeholder');
+    if (!nav || !redZones.length) return;
+
+    function update() {
+      const navBottom = nav.getBoundingClientRect().bottom;
+      let isOverRed = false;
+      for (const el of redZones) {
+        const r = el.getBoundingClientRect();
+        if (r.top < navBottom && r.bottom > 0) { isOverRed = true; break; }
+      }
+      nav.classList.toggle('nav--red', isOverRed);
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+</script>
 
 </body></html>
