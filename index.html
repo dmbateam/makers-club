@@ -288,8 +288,12 @@
     border-top: var(--border); padding: 36px 0 56px;
     display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-2);
   }
-  footer.site a { color: var(--ink); text-decoration: none; transition: color 120ms ease; }
-  footer.site a:hover { color: var(--riso-red-ink); }
+  footer.site a {
+    color: var(--ink); text-decoration: none;
+    padding: 2px 6px; margin: 0 -2px;
+    transition: background 120ms ease, color 120ms ease;
+  }
+  footer.site a:hover { background: var(--ink); color: var(--paper); }
 
   @media (max-width: 1000px) {
     .hero { grid-template-columns: 1fr; }
