@@ -9,7 +9,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ai makers club — design system</title>
+<title>ai makers club — mono variant</title>
 <link rel="stylesheet" href="colors_and_type.css">
 <style>
   html, body { background: var(--paper); }
@@ -48,8 +48,8 @@
   }
   .hero .weeknum { font-size: 14px; color: var(--riso-red-ink); margin-bottom: 18px;}
   .hero h1 {
-    font-family: var(--ff-serif); font-style: italic; font-weight: 400;
-    font-size: 128px; line-height: 0.95; letter-spacing: -0.02em;
+    font-family: var(--ff-mono); font-weight: 700;
+    font-size: 88px; line-height: 1; letter-spacing: -0.04em;
     margin: 0; max-width: 14ch; text-transform: none;
   }
   .hero .sub { font-size: 19px; line-height: 1.55; margin: 36px 0 0; max-width: 46ch; color: var(--ink);}
@@ -85,14 +85,14 @@
   .section-head .kicker { font-size: 12px; color: var(--ink-2); letter-spacing: 0; }
   .section-head .kicker::before { content: "§ "; color: var(--riso-red-ink); }
   .section-head h2 {
-    font-family: var(--ff-serif); font-style: italic; font-weight: 400;
-    font-size: 56px; line-height: 1; letter-spacing: -0.02em;
+    font-family: var(--ff-mono); font-weight: 700;
+    font-size: 40px; line-height: 1.05; letter-spacing: -0.03em;
     margin: 10px 0 0; text-transform: none;
   }
   .section-head .right { font-size: 13px; color: var(--ink-2); align-self: flex-end;}
 
   /* ------- rhythm / 3-step ------- */
-  .rhythm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0 96px;}
+  .rhythm { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0 48px;}
   .rhythm .card { position: relative;}
   .rhythm .num {
     font-family: var(--ff-mono); font-size: 56px; font-weight: 700;
@@ -151,29 +151,9 @@
   .red-band-full .quote { font-family: var(--ff-serif); font-style: italic; font-size: 36px; line-height: 1.1; letter-spacing: -0.02em; max-width: 26ch;}
   .red-band-full .attr { font-family: var(--ff-mono); font-size: 13px; opacity: 0.9;}
 
-  /* ------- manifesto ------- */
-  .manifesto { padding: 96px 0 48px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 64px;}
-  .manifesto .kicker { font-size: 12px; color: var(--ink-2);}
-  .manifesto .kicker::before { content: "§ "; color: var(--riso-red-ink); }
-  .manifesto h2 {
-    font-family: var(--ff-serif); font-style: italic; font-weight: 400;
-    font-size: 56px; line-height: 1; letter-spacing: -0.02em; margin: 12px 0 0;
-    text-transform: none;
-  }
-  .manifesto ol { list-style: none; padding: 0; margin: 0; counter-reset: m;}
-  .manifesto ol li {
-    counter-increment: m; padding: 20px 0; border-top: 1px solid var(--mist-2);
-    display: grid; grid-template-columns: 60px 1fr; gap: 16px; align-items: baseline;
-  }
-  .manifesto ol li::before {
-    content: counter(m, decimal-leading-zero);
-    font-family: var(--ff-mono); color: var(--riso-red); font-weight: 700; font-size: 14px;
-  }
-  .manifesto ol li p { margin: 0; font-size: 18px; line-height: 1.45; }
-  .manifesto ol li:last-child { border-bottom: 1px solid var(--mist-2);}
-
   /* ------- who + where ------- */
-  .whowhere { padding: 72px 0 24px; }
+  .whowhere { padding: 48px 0 48px; border-top: var(--border); }
+  .whowhere .section-head { border-top: 0; padding-top: 0; }
   .whowhere .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
   .whowhere .card h3 {
     font-family: var(--ff-mono); font-size: 13px; font-weight: 500;
@@ -181,19 +161,20 @@
   }
   .whowhere .card h3::before { content: "~/"; opacity: 0.7; }
   .whowhere .card .lede {
-    font-family: var(--ff-serif); font-style: italic; font-size: 32px;
-    line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 16px;
+    font-family: var(--ff-mono); font-weight: 700; font-size: 22px;
+    line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 16px;
   }
   .whowhere .card p { font-size: 14px; line-height: 1.6; margin: 0; color: var(--ink); }
 
   /* ------- join (founding members CTA) ------- */
-  .join { padding: 72px 0 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .join { padding: 72px 0 64px; border-top: var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
   .join h2 {
-    font-family: var(--ff-serif); font-style: italic; font-weight: 400;
-    font-size: 88px; line-height: 0.95; letter-spacing: -0.02em; margin: 0;
-    max-width: 12ch; text-transform: none;
+    font-family: var(--ff-mono); font-weight: 700;
+    font-size: 64px; line-height: 1; letter-spacing: -0.04em; margin: 0;
+    max-width: 14ch; text-transform: none;
   }
-  .join .card-join { border: var(--border); padding: 32px; background: var(--paper); }
+  .join .card-join { border: var(--border); padding: 32px; background: var(--paper); box-sizing: border-box; }
+  .join .card-join * { box-sizing: border-box; }
   .join .card-join .kicker { font-size: 12px; color: var(--riso-red-ink); margin: 0 0 6px; letter-spacing: 0.02em; }
   .join .card-join .kicker::before { content: "※ "; }
   .join .card-join .price {
@@ -202,13 +183,29 @@
   }
   .join .card-join .price .per { font-size: 18px; font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
   .join .card-join .tagline { font-size: 13px; color: var(--ink-2); margin: 0 0 22px; }
-  .join .card-join .counter-row {
-    display: flex; justify-content: space-between; align-items: baseline;
-    padding: 14px 0; border-top: 1px solid var(--mist-2); border-bottom: 1px solid var(--mist-2);
-    margin-bottom: 22px; font-size: 13px;
+  .join .card-join .progress {
+    padding: 14px 0;
+    border-top: 1px solid var(--mist-2);
+    border-bottom: 1px solid var(--mist-2);
+    margin-bottom: 22px;
   }
-  .join .card-join .counter-row .live { color: var(--riso-red); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; }
-  .join .card-join .counter-row .live::before { content: "● "; }
+  .join .card-join .progress-bar {
+    font-family: var(--ff-mono); font-size: 16px;
+    color: var(--ink); letter-spacing: 2px;
+    margin: 0 0 10px; overflow: hidden; white-space: nowrap;
+    line-height: 1;
+  }
+  .join .card-join .bar-filled { color: var(--riso-red); }
+  .join .card-join .bar-empty { color: var(--ink); opacity: 0.25; }
+  .join .card-join .progress-meta {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 13px;
+  }
+  .join .card-join .progress-meta .live {
+    color: var(--riso-red); font-size: 11px;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .join .card-join .progress-meta .live::before { content: "● "; }
   .join .card-join .btn { width: 100%; justify-content: center; font-size: 15px; }
   .join .card-join .finep { font-size: 12px; color: var(--ink-2); margin: 14px 0 0; text-align: center; }
   .join .card-join .included {
@@ -237,12 +234,12 @@
 
   @media (max-width: 1000px) {
     .hero { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 72px; }
+    .hero h1 { font-size: 56px; }
     .rhythm { grid-template-columns: 1fr 1fr; }
-    .manifesto, .join { grid-template-columns: 1fr; }
+    .join { grid-template-columns: 1fr; }
     .whowhere .grid, .faq .list { grid-template-columns: 1fr; }
     .red-band-full { flex-direction: column; align-items: flex-start; }
-    .join h2 { font-size: 56px; }
+    .join h2 { font-size: 44px; }
   }
 </style>
 </head>
@@ -264,7 +261,8 @@
     </div>
     <div class="links">
       <a href="#rhythm">rhythm</a>
-      <a href="#manifesto">manifesto</a>
+      <a href="#who">the club</a>
+      <a href="#faq">faq</a>
       <a href="templates/brief/weekly-brief.html">this week →</a>
     </div>
     <a class="btn btn--ghost" href="#join" style="padding: 8px 14px; font-size: 13px;" data-cc-id="cc-27">join →</a>
@@ -283,7 +281,7 @@
     <div data-cc-id="cc-1">
       <div class="weeknum" data-cc-id="cc-6">※ a weekly workshop for creatives</div>
       <h1 data-cc-id="cc-7" style="">learn AI&nbsp;<br>by making</h1>
-      <p class="sub" data-cc-id="cc-1" style=""><span style="letter-spacing: -0.16px;" data-cc-id="cc-39">the best way to learn AI is to make stuff with it. e</span>very monday a new brief drops. you build during the week. every sunday we show what we shipped.&nbsp;</p>
+      <p class="sub">a weekly workshop for people who'd rather ship than watch tutorials.</p>
       <div class="ctas" data-cc-id="cc-2">
         <a class="btn" href="#join">join the club <span class="cursor">▌</span></a>
       </div>
@@ -320,7 +318,7 @@
         <div class="kicker">01 — the rhythm</div>
         <h2 data-cc-id="cc-30" style="">one week, three beats.</h2>
       </div>
-      <div class="right">7 days · mon → sun</div>
+      <div class="right"></div>
     </div>
     <div class="rhythm">
       <div class="card">
@@ -346,38 +344,22 @@
     <div class="section-head">
       <div>
         <div class="kicker">02 — the club</div>
-        <h2>who's in. where it lives.</h2>
+        <h2>who &amp; where.</h2>
       </div>
-      <div class="right">50 makers · one room</div>
+      <div class="right"></div>
     </div>
     <div class="grid">
       <div class="card">
         <h3>who.md</h3>
-        <p class="lede">creatives who'd rather build than watch.</p>
+        <p class="lede">creatives with "a maker gene".</p>
         <p>designers, illustrators, writers, photographers, architects, founders. any level, any stack. the only requirement: you want to make things with AI, not read about it.</p>
       </div>
       <div class="card">
         <h3>where.md</h3>
         <p class="lede">a private community on circle.</p>
-        <p>channels to discuss and connect. resources to get you unstuck. the weekly brief, the show-&amp;-tell thread, and every primer we've ever shipped — all in one room.</p>
+        <p>channels to discuss and connect. resources to get you unstuck. the weekly brief, the show-&amp;-tell thread, and every guide we've ever shipped — all in one room.</p>
       </div>
     </div>
-  </section>
-
-  <!-- ───────── manifesto ───────── -->
-  <section id="manifesto" class="manifesto" data-cc-id="cc-16">
-    <div data-cc-id="cc-26">
-      <div class="kicker" data-cc-id="cc-28" style="">03 — the manifesto</div>
-      <h2 data-cc-id="cc-29" style="">one club.<br>five "rules".</h2>
-      <p style="font-size: 14px; color: var(--ink-2); margin-top: 24px; line-height: 1.55; max-width: 34ch;" data-cc-id="cc-10">five rules. read them aloud the first monday of every month.</p>
-    </div>
-    <ol>
-      <li><p data-cc-id="cc-9" style="">you do not talk about the club.</p></li>
-      <li><p data-cc-id="cc-7" style="">bring what you know. borrow what you don't.</p></li>
-      <li><p data-cc-id="cc-8" style="">ship beats polish. sunday beats someday.</p></li>
-      <li data-cc-id="cc-15"><p data-cc-id="cc-11" style=""><span style="letter-spacing: -0.16px;" data-cc-id="cc-14">make the thing you wanted to exist on monday morning.</span></p></li>
-      <li><p data-cc-id="cc-12" style=""><span style="letter-spacing: -0.16px;" data-cc-id="cc-13">see rule number 01.</span></p></li>
-    </ol>
   </section>
 
   <!-- ───────── join (founding members) ───────── -->
@@ -386,21 +368,18 @@
   <section id="join" class="join">
     <h2>join the first 50.</h2>
     <div class="card-join">
-      <div class="kicker">founding members</div>
+      <div class="kicker">founding cohort · limited to 50</div>
       <div class="price">$49<span class="per"> / month</span></div>
-      <p class="tagline">grandfathered forever. this price never goes up for you.</p>
-      <div class="counter-row">
-        <span><b class="spots-sold" data-sold="0">00</b> of <b>50</b> spots taken</span>
-        <span class="live">open</span>
+      <p class="tagline">this price never goes up for you.</p>
+      <div class="progress">
+        <div class="progress-bar" aria-hidden="true">[<span class="bar-filled"></span><span class="bar-empty">··················································</span>]</div>
+        <div class="progress-meta">
+          <span><b class="spots-sold" data-sold="0">00</b> of 50 claimed</span>
+          <span class="live">open</span>
+        </div>
       </div>
       <a class="btn btn--accent" href="/join">join the club <span class="cursor">▌</span></a>
-      <p class="finep">month to month. cancel anytime.</p>
-      <ul class="included">
-        <li>one brief every monday</li>
-        <li>the private room on circle</li>
-        <li>primers when a brief needs them</li>
-        <li>101s on claude code &amp; codex</li>
-      </ul>
+      <p class="finep">month to month. cancel anytime.<br>when the 50 fill, doors close and the price goes up.</p>
     </div>
   </section>
 
@@ -408,23 +387,23 @@
   <section id="faq" class="faq">
     <div class="section-head">
       <div>
-        <div class="kicker">04 — questions</div>
-        <h2>the fine print.</h2>
+        <div class="kicker">03 — questions</div>
+        <h2>faq.</h2>
       </div>
       <div class="right">read before you join</div>
     </div>
     <div class="list">
       <div class="item">
         <h4 class="q">is this a course?</h4>
-        <p class="a">no. it's a club with a rhythm. when a brief needs context, we ship a short primer — but you learn the rest by trying things, talking to the AI, and talking to the room.</p>
+        <p class="a">no. but when a weekly challenge requires specific knowledge, we ship a short guide. the rest you learn by trying things, talking to the AI, and talking to the room.</p>
       </div>
       <div class="item">
         <h4 class="q">do I need to know how to code?</h4>
-        <p class="a">no. briefs are built to ship with an agentic tool like claude code or codex. 101 resources included. if you've watched <a href="https://www.youtube.com/watch?v=NlVxAy05KNA&amp;t=26s">this intro</a>, you're ready.</p>
+        <p class="a">no. if you've watched <a href="https://www.youtube.com/watch?v=NlVxAy05KNA&amp;t=26s" target="_blank" rel="noopener">this 101 course</a>, you're ready.</p>
       </div>
       <div class="item">
-        <h4 class="q">what tools do you recommend?</h4>
-        <p class="a">an agentic coding tool — claude code or codex. if you haven't used one before, we walk you through getting started.</p>
+        <h4 class="q">what tools will we use?</h4>
+        <p class="a">primarily an agentic coding tool like claude code or codex. if you haven't used one before, <a href="https://www.youtube.com/watch?v=NlVxAy05KNA&amp;t=26s" target="_blank" rel="noopener">watch this</a>.</p>
       </div>
       <div class="item">
         <h4 class="q">what do those tools cost?</h4>
@@ -436,7 +415,7 @@
       </div>
       <div class="item">
         <h4 class="q">what if I miss a week?</h4>
-        <p class="a">the club keeps going. the next brief drops on schedule. no catching up — you pick up wherever the next monday lands.</p>
+        <p class="a">the club keeps going. the next brief drops on schedule. no catching up needed. you pick up wherever the next monday lands.</p>
       </div>
       <div class="item">
         <h4 class="q">can I cancel?</h4>
@@ -448,7 +427,7 @@
       </div>
       <div class="item">
         <h4 class="q">who's running this?</h4>
-        <p class="a">alen faljic, founder of d.mba. not a developer — background in education, built dozens of internal tools and games for students, currently full-time on staying at the edge of AI tools.</p>
+        <p class="a"><a href="https://www.linkedin.com/in/alenfa/" target="_blank" rel="noopener">alen faljic</a>, founder of d.mba. not a developer — background in education, built dozens of internal tools and games for students, currently full-time on staying at the edge of AI tools.</p>
       </div>
     </div>
   </section>
@@ -459,11 +438,6 @@
 <div class="container">
   <footer class="site">
     <div>ai makers club · est. 2026 · built on mondays, shipped on sundays</div>
-    <div>
-      <a href="README.md">README</a> &nbsp;·&nbsp;
-      <a href="templates/brief/weekly-brief.html">week 014</a> &nbsp;·&nbsp;
-      <a href="mailto:hello@makersclub.ai">hello@makersclub.ai</a>
-    </div>
   </footer>
 </div>
 
