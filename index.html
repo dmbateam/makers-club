@@ -159,6 +159,49 @@
   }
   .w-card p { font-size: 13.5px; line-height: 1.55; margin: 0; color: var(--ink); }
 
+  /* ------- outcomes (3×2 numbered grid) ------- */
+  .outcomes-lede {
+    font-size: 15px; color: var(--ink-2); line-height: 1.55;
+    margin: 8px 0 32px; max-width: 60ch;
+  }
+  .outcome-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: var(--border);
+    margin-bottom: 48px;
+  }
+  .o-card { padding: 28px 24px; border-right: 1px solid var(--mist-2); }
+  .o-card:nth-child(-n+3) { border-bottom: 1px solid var(--mist-2); }
+  .o-card:nth-child(3n) { border-right: 0; }
+  .o-card .num {
+    font-family: var(--ff-mono); font-size: 40px; font-weight: 700;
+    color: var(--riso-red); line-height: 1; margin-bottom: 14px;
+    letter-spacing: -0.03em;
+  }
+  .o-card h3 {
+    font-family: var(--ff-mono); font-size: 18px; font-weight: 700;
+    letter-spacing: -0.02em; margin: 0 0 10px; text-transform: none;
+  }
+  .o-card p { font-size: 13.5px; line-height: 1.55; margin: 0; color: var(--ink); }
+
+  /* open-ended 7th card — signals the list isn't closed */
+  .o-card--ghost {
+    grid-column: 1 / -1;
+    border-right: 0;
+    border-top: 1px dashed var(--ink-2);
+    padding: 24px;
+    display: flex; align-items: center; gap: 20px;
+    background: transparent;
+  }
+  .o-card--ghost .plus {
+    font-family: var(--ff-mono); font-size: 40px; font-weight: 700;
+    color: var(--ink-2); line-height: 1; letter-spacing: -0.03em;
+    flex: 0 0 auto;
+  }
+  .o-card--ghost p {
+    font-size: 14px; line-height: 1.55; margin: 0;
+    color: var(--ink-2);
+  }
+
   /* ------- video placeholder (red band) ------- */
   .video-placeholder {
     margin: 0 calc(50% - 50vw) 72px;
@@ -301,6 +344,12 @@
     .week-cards { grid-template-columns: 1fr; }
     .w-card { border-right: 0; border-bottom: 1px solid var(--mist-2); }
     .w-card:last-child { border-bottom: 0; }
+    .outcome-cards { grid-template-columns: 1fr; }
+    .o-card { border-right: 0; border-bottom: 1px solid var(--mist-2); }
+    .o-card:nth-child(-n+3) { border-bottom: 1px solid var(--mist-2); }
+    .o-card:nth-last-child(2) { border-bottom: 0; }
+    .o-card--ghost { border-top: 1px dashed var(--ink-2); border-bottom: 0; }
+    .o-card:last-child { border-bottom: 0; }
     .join { grid-template-columns: 1fr; }
     .whowhere .grid, .faq .list { grid-template-columns: 1fr; }
     .red-band-full { flex-direction: column; align-items: flex-start; }
@@ -326,6 +375,7 @@
     </div>
     <div class="nav-right">
       <div class="links">
+        <a href="#outcomes">outcomes</a>
         <a href="#rhythm">rhythm</a>
         <a href="#who">who &amp; where</a>
         <a href="#faq">faq</a>
@@ -371,11 +421,59 @@
     </div>
   </div>
 
+  <!-- ───────── outcomes ───────── -->
+  <section id="outcomes">
+    <div class="section-head">
+      <div>
+        <div class="kicker">01 — the outcomes</div>
+        <h2>what you'll make.</h2>
+      </div>
+      <div class="right"></div>
+    </div>
+    <p class="outcomes-lede">the club teaches you to shape the computer to your craft. not the other way around.</p>
+    <div class="outcome-cards">
+      <div class="o-card">
+        <div class="num">01</div>
+        <h3>a personal assistant</h3>
+        <p>an assistant that handles the everyday stuff — replying emails, finding flights, ordering groceries, booking dinners, hunting gifts, prepping for meetings. one prompt, done.</p>
+      </div>
+      <div class="o-card">
+        <div class="num">02</div>
+        <h3>a saas (or a clickable prototype)</h3>
+        <p>a product people actually pay for — or a working prototype to test demand first. checkout, database, admin panel, email flow.</p>
+      </div>
+      <div class="o-card">
+        <div class="num">03</div>
+        <h3>a playable game</h3>
+        <p>educational, entertaining, or both. a classroom tool that teaches a concept. a weekend browser puzzle. a simulator that makes an abstract idea click.</p>
+      </div>
+      <div class="o-card">
+        <div class="num">04</div>
+        <h3>a personal site</h3>
+        <p>not a wordpress template. a site that reflects how you actually think — copy, layout, interactions — deployed on your own domain for ~$10/yr.</p>
+      </div>
+      <div class="o-card">
+        <div class="num">05</div>
+        <h3>programmatic video</h3>
+        <p>video built from code instead of timeline-scrubbing. product demos, explainers, social posts, animated hero reels — templated once, remixed forever.</p>
+      </div>
+      <div class="o-card">
+        <div class="num">06</div>
+        <h3>a custom dashboard</h3>
+        <p>pull revenue, calendar, analytics, fitness — into one view you control, instead of flipping between five tools your team already pays for.</p>
+      </div>
+      <div class="o-card o-card--ghost">
+        <div class="plus">+</div>
+        <p>more technologies &amp; your ideas — no closed list.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ───────── rhythm ───────── -->
   <section id="rhythm">
     <div class="section-head">
       <div>
-        <div class="kicker">01 — the rhythm</div>
+        <div class="kicker">02 — the rhythm</div>
         <h2>one week, three beats.</h2>
       </div>
       <div class="right"></div>
@@ -420,7 +518,7 @@
   <section id="who" class="whowhere">
     <div class="section-head">
       <div>
-        <div class="kicker">02 — the club</div>
+        <div class="kicker">03 — the club</div>
         <h2>who &amp; where.</h2>
       </div>
       <div class="right"></div>
@@ -464,7 +562,7 @@
   <section id="faq" class="faq">
     <div class="section-head">
       <div>
-        <div class="kicker">03 — questions</div>
+        <div class="kicker">04 — questions</div>
         <h2>faq.</h2>
       </div>
       <div class="right">read before you join</div>
@@ -476,7 +574,7 @@
       </div>
       <div class="item">
         <h4 class="q">do I need to know how to code?</h4>
-        <p class="a">no. if you've watched <a href="https://www.youtube.com/watch?v=NlVxAy05KNA&amp;t=26s" target="_blank" rel="noopener">this 101 course</a>, you're ready.</p>
+        <p class="a">no. if you've watched at least the first half of <a href="https://www.youtube.com/watch?v=NlVxAy05KNA&amp;t=26s" target="_blank" rel="noopener">this 101 course</a> (or you are planning to), you're ready.</p>
       </div>
       <div class="item">
         <h4 class="q">what tools will we use?</h4>
