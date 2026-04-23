@@ -10,7 +10,7 @@ A landing page for AI Makers Club — Alen's weekly workshop community. Original
 
 - **`index.html`** — the active landing page (was `index-mono.html`). All edits go here.
 - **`join/index.html`** — `/join` route. Minimal page: nav + empty `#paddle-form` placeholder for the eventual Paddle embed.
-- **`terms/`, `privacy/`, `refund/`** — legal pages required by Paddle's Website Approval. Linked in the footer of every page. Contact email is `hello@joinaimakers.club` (not yet provisioned — placeholder for the future custom domain).
+- **`terms/`, `privacy/`, `refund/`** — legal pages required by Paddle's Website Approval. Linked in the footer of every page. Contact email is `support@d.mba`. Site is live at `ai-makers.club`.
 - **`_redirects`** — Netlify redirects. Handles legacy `/index-mono*` URLs and exposes `/serif`.
 - **`briefs/wkNNN.html`** — weekly brief pages, one per week (currently `wk001.html`). Each imports `../colors_and_type.css`.
 - **`colors_and_type.css`** — design tokens (colors, type scale, spacing, borders). Imported by every page. Edit only on a brand change.

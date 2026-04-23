@@ -283,7 +283,24 @@
     font-size: 64px; line-height: 1; letter-spacing: -0.04em; margin: 0;
     max-width: 14ch; text-transform: none;
   }
-  .join .card-join { border: var(--border); padding: 32px; background: var(--paper); box-sizing: border-box; }
+  .join .join-sub { font-size: 14px; color: var(--ink-2); margin: 20px 0 0; max-width: 32ch; }
+  .join .join-sub::before { content: "※ "; color: var(--riso-red-ink); }
+  .join .card-join { border: var(--border); padding: 32px; background: var(--paper); box-sizing: border-box; position: relative; }
+  .join .card-join .date-stamp {
+    position: absolute;
+    top: -16px; right: -10px;
+    background: var(--riso-red);
+    color: var(--paper);
+    padding: 10px 14px;
+    transform: rotate(-3deg);
+    letter-spacing: 0;
+    line-height: 1.1;
+    z-index: 2;
+    white-space: nowrap;
+  }
+  .join .card-join .date-stamp .when { display: block; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 3px; }
+  .join .card-join .date-stamp .big { display: block; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+  .join .card-join .date-stamp .sep { opacity: 0.6; margin: 0 3px; }
   .join .card-join * { box-sizing: border-box; }
   .join .card-join .kicker { font-size: 12px; color: var(--riso-red-ink); margin: 0 0 6px; letter-spacing: 0.02em; }
   .join .card-join .kicker::before { content: "※ "; }
@@ -292,6 +309,7 @@
     line-height: 1; letter-spacing: -0.03em; margin: 8px 0 4px;
   }
   .join .card-join .price .per { font-size: 18px; font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
+  .join .card-join .price .tax { font-size: 12px; font-weight: 400; color: var(--ink-3); letter-spacing: 0; margin-left: 4px; }
   .join .card-join .tagline { font-size: 13px; color: var(--ink-2); margin: 0 0 22px; }
   .join .card-join .progress {
     padding: 14px 0;
@@ -381,6 +399,8 @@
     .hero aside pre.ascii-card { font-size: 11px; }
     .join h2 { font-size: 36px; }
     .join .card-join { padding: 24px; }
+    .join .card-join .date-stamp { top: -12px; right: -8px; padding: 8px 12px; }
+    .join .card-join .date-stamp .big { font-size: 16px; }
     .join .card-join .price { font-size: 48px; }
     .section-head { padding: 40px 0 20px; }
     .section-head h2 { font-size: 32px; }
@@ -419,7 +439,7 @@
   <!-- ───────── hero ───────── -->
   <section class="hero" data-cc-id="cc-5">
     <div data-cc-id="cc-1">
-      <div class="weeknum" data-cc-id="cc-6">※ starting april 27th · 33 founding spots</div>
+      <div class="weeknum" data-cc-id="cc-6">※ starting may 4th · 33 founding spots</div>
       <h1 data-cc-id="cc-7" style="">learn AI&nbsp;<br>by making.</h1>
       <p class="sub">a community of creatives who'd rather ship than watch tutorials. new brief every monday.</p>
       <div class="ctas" data-cc-id="cc-2">
@@ -579,10 +599,16 @@
   <!-- counter wiring: hook Paddle webhook → server → update .spots-sold text
        and the data-sold attribute. keep both in sync. -->
   <section id="join" class="join">
-    <h2>join the first 33.</h2>
+    <div>
+      <h2>join the first 33.</h2>
+    </div>
     <div class="card-join">
+      <div class="date-stamp">
+        <span class="when">first brief drops</span>
+        <span class="big">mon<span class="sep">·</span>may 4</span>
+      </div>
       <div class="kicker">founding members · limited to 33</div>
-      <div class="price">$49<span class="per"> / month</span></div>
+      <div class="price">$49<span class="tax">+tax</span><span class="per"> / month</span></div>
       <p class="tagline">this price never goes up for you.</p>
       <div class="progress">
         <div class="progress-bar" aria-hidden="true">[<span class="bar-filled"></span><span class="bar-empty">·································</span>]</div>
@@ -642,7 +668,7 @@
         <h4 class="q">who's running this?</h4>
         <p class="a"><a href="https://www.linkedin.com/in/alenfa/" target="_blank" rel="noopener">alen faljic</a> and <a href="https://www.linkedin.com/in/thomasprioruk/" target="_blank" rel="noopener">tom prior</a>, d.mba's founder and program director. neither of us is a developer.</p>
         <p class="a">between us we built: AI tutors, classroom games, a self-running finance dashboard, a telegram workout coach, team tools saving 10+ hours a week, and an app shipped to the app store with paying customers.</p>
-        <p class="a"><b>two non-devs, both shipping. this club is where we share how.</b></p>
+        <p class="a">two non-devs, both shipping. this club is where we share how.</p>
         <p class="a note">(senior engineers are on call when we hit our limits. so you're not learning from guessers.)</p>
       </div>
     </div>
