@@ -1,0 +1,4 @@
+[functions]
+  # Bundle non-JS assets (e.g. HTML email templates) alongside functions
+  # so they can be read with fs at runtime.
+  included_files = ["netlify/functions/emails/**"]
