@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>week 001 — build a skill.md that saves an hour a week · ai makers club</title>
+<title>week 001 — build an automation that saves an hour a week · ai makers club</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
 <link rel="stylesheet" href="../colors_and_type.css"/>
 <style>
@@ -43,14 +43,16 @@
     display: flex; justify-content: space-between; align-items: center;
     font-family: var(--ff-mono); font-size: 12px; color: var(--ink-2);
   }
-  .topline .left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+  .topline .left { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; padding: 4px 8px; margin: -4px -8px; }
   .topline .left svg { width: 34px; height: 22px; display: block; overflow: visible; }
+  .topline .left svg g { transition: fill 120ms ease; }
   .topline .left .wm {
     font-family: var(--ff-mono); font-weight: 700; font-size: 18px;
     color: var(--ink); letter-spacing: -0.02em; line-height: 1;
     transition: color 120ms ease;
   }
-  .topline a.left:hover .wm { color: var(--riso-red-ink); }
+  .topline .left:hover .wm { color: var(--paper); }
+  .topline .left:hover svg g { fill: var(--paper); }
   .topline .right { text-align: right; }
 
   .title-block { margin-top: 40px; }
@@ -167,7 +169,7 @@
       <svg viewBox="4 20 116 74">
         <g font-family="'JetBrains Mono', monospace" fill="#15224A">
           <text x="10" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em">[</text>
-          <rect x="44" y="36" width="30" height="54"/>
+          <circle cx="73" cy="51" r="10"/>
           <text x="78" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em">]</text>
         </g>
       </svg>
@@ -178,8 +180,8 @@
 
   <section class="title-block">
     <div class="weeknum">※ week 001 — brief</div>
-    <h1 class="title">build a skill.md that<br>saves you an hour a week.
-      <small>pick one task you actually do. write a skill.md that does it for you. the bar: next monday, you reach for it without thinking.</small>
+    <h1 class="title">build an automation that<br>saves you an hour a week.
+      <small>pick one task you do regularly. build an automation (a skill.md) that does it with a single prompt — <i>"do my morning briefing"</i> → your day's tasks, emails to answer, what needs attention.</small>
     </h1>
   </section>
 
@@ -188,7 +190,7 @@
   <div class="grid">
     <div class="col">
       <h3>◆ what you could make</h3>
-      <p>a skill is a small, repeatable recipe — one task, one output, one prompt away. some examples to get the brain going:</p>
+      <p>some examples to get the brain going:</p>
       <ul>
         <li>ux-reviewer — a screen or flow → a usability check</li>
         <li>competitor research — name an industry, get a comprehensive report</li>
@@ -202,7 +204,7 @@
       <p>when you are done, drop your result in <b>#shipped</b> including:</p>
       <ul>
         <li>a 60-second demo — or a screenshot + a few lines</li>
-        <li>your skill.md (only if you're comfortable — strip api keys first)</li>
+        <li>your automation (only if you're comfortable — strip api keys first)</li>
         <li>what your manual workflow looked like before</li>
       </ul>
     </div>
@@ -238,17 +240,12 @@
   </section>
 
   <div class="prompt">
-    <div class="p-text">what skill will you build?</div>
+    <div class="p-text">what automation will you build?</div>
     <a class="btn btn--accent" href="#">drop it in #shipped <span class="cursor">▌</span></a>
   </div>
 
   <footer class="footer">
-    <div>
-      ai makers club · weekly workshop · est. 2026<br>
-      <a href="/terms/">terms</a> &nbsp;·&nbsp;
-      <a href="/privacy/">privacy</a> &nbsp;·&nbsp;
-      <a href="/refund/">refund</a>
-    </div>
+    <div>ai makers club · weekly workshop · est. 2026</div>
     <div class="right">
       brief 01<br>
       <a href="../">← back to club</a>

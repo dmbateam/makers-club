@@ -1,6 +1,6 @@
 import { getStore } from '@netlify/blobs';
 
-const TOTAL_SEATS = 50;
+const TOTAL_SEATS = 33;
 
 export default async () => {
   const store = getStore('paddle-counter');
