@@ -1,6 +1,3 @@
 # Legacy paths from the pre-rename layout
 /index-mono      /       301
 /index-mono.html /       301
-
-# Keep the serif variant reachable under a readable url
-/serif           /index-serif.html  200

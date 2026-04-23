@@ -141,7 +141,10 @@ a {
   text-underline-offset: 3px;
   transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
 }
-a:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
+/* default hover = subtle color shift for inline links in prose.
+   chip-like links (nav, btn, footer, page-back, lockup) override this
+   with their own :hover rules that flip the block. */
+a:hover { color: var(--riso-red-ink); }
 
 code, pre, kbd, samp { font-family: var(--ff-mono); }
 pre { background: var(--paper-2); border: var(--border); padding: var(--sp-4); overflow: auto; }
