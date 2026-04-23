@@ -18,12 +18,19 @@
     position: sticky; top: 0; background: var(--paper); z-index: 10;
   }
   nav.top .lockup { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+  nav.top .lockup:hover { background: transparent; color: inherit; }
   nav.top .lockup svg { width: 34px; height: 22px; display: block; overflow: visible; }
   nav.top .lockup .wm { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
   nav.top .nav-right { display: flex; align-items: center; gap: 24px; }
   nav.top .links { display: flex; gap: 22px; font-size: 13px; }
   nav.top .links a { color: var(--ink); text-decoration: none; padding: 4px 8px; transition: background 120ms ease, color 120ms ease; }
   nav.top .links a:hover { background: var(--ink); color: var(--paper); }
+
+  @media (max-width: 640px) {
+    .container { padding: 0 24px; }
+    nav.top .links { display: none; }
+    nav.top .lockup .wm { white-space: nowrap; }
+  }
 
   /* ------- paddle mount ------- */
   main.join-main {
@@ -86,7 +93,7 @@
       <a href="/privacy/">privacy</a>
       <a href="/refund/">refund</a>
     </div>
-    <div>d.MBA d.o.o. · slovenia</div>
+    <div>d.MBA d.o.o.</div>
   </footer>
 </div>
 

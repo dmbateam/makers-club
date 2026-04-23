@@ -1,13 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 120" width="720" height="120">
-  
-  <g font-family="&#39;JetBrains Mono&#39;, ui-monospace, monospace" fill="#15224A">
-    
-    <text x="0" y="92" font-size="104" font-weight="700" letter-spacing="-0.04em">[</text>
-    <rect x="40" y="40" width="32" height="58" fill="#15224A"></rect>
-    <text x="74" y="92" font-size="104" font-weight="700" letter-spacing="-0.04em">]</text>
-
-    
-    <text x="150" y="72" font-size="40" font-weight="700" letter-spacing="-0.03em">ai makers club</text>
-    <text x="150" y="102" font-size="18" font-weight="400" fill="#3B4874" letter-spacing="0">~/weekly-workshop</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 120" width="640" height="120">
+  <rect width="640" height="120" fill="none"></rect>
+  <g fill="#15224A" font-family="'JetBrains Mono', ui-monospace, monospace" font-weight="700" letter-spacing="-0.02em">
+    <text x="10" y="86" font-size="96">[</text>
+    <circle cx="73" cy="51" r="10"></circle>
+    <text x="78" y="86" font-size="96">]</text>
+    <text x="158" y="70" font-size="48">ai makers club</text>
   </g>
 </svg>

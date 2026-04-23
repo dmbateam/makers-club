@@ -26,7 +26,8 @@
     position: sticky; top: 0; background: var(--paper); z-index: 10;
     transition: background 120ms ease, border-color 120ms ease;
   }
-  nav.top .lockup { display: flex; align-items: center; gap: 10px; }
+  nav.top .lockup { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+  nav.top .lockup:hover { background: transparent; color: inherit; }
   nav.top .lockup svg { width: 34px; height: 22px; display: block; overflow: visible; }
   nav.top .lockup .wm { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; transition: color 120ms ease; }
   nav.top .nav-right { display: flex; align-items: center; gap: 24px; }
@@ -67,30 +68,37 @@
   .hero .ctas { margin-top: 36px; display: flex; gap: 14px; flex-wrap: wrap;}
 
   .hero aside {
-    border: var(--border); background: var(--paper-2);
     padding: 28px;
+    border: var(--border);
+    background: var(--paper-2);
     box-sizing: border-box;
   }
-  .hero aside * { box-sizing: border-box; }
-  .hero aside .label { font-size: 12px; color: var(--ink-2); margin-bottom: 14px; }
-  .hero aside .label::before { content: "$ "; color: var(--riso-red-ink); }
-  .hero aside pre {
-    font-family: var(--ff-mono); font-size: 13px; line-height: 1.5;
-    white-space: pre; margin: 0 0 18px; letter-spacing: 0;
+  .hero aside pre.ascii-card {
+    font-family: var(--ff-mono);
+    font-size: 13px; line-height: 1.5;
+    white-space: pre; margin: 0; letter-spacing: 0;
     background: none; border: 0; padding: 0;
+    color: var(--ink);
+    overflow-x: auto;
   }
-  .hero aside .row {
-    display: flex; justify-content: space-between; padding: 6px 0;
-    border-top: 1px solid var(--mist-2); font-size: 13px;
+  .hero aside .ascii-path { color: var(--riso-red-ink); }
+
+  /* rhythm → next brief link */
+  .rhythm-brief { margin: 40px 0 56px; text-align: center; }
+  .rhythm-brief a {
+    display: inline-block;
+    padding: 12px 22px;
+    font-size: 15px; font-weight: 700;
+    border: 1.5px solid var(--ink);
+    color: var(--ink); text-decoration: none;
+    transition: background 120ms ease, color 120ms ease;
   }
-  .hero aside .row:first-of-type { border-top: 0;}
-  .hero aside .row b { font-weight: 700; }
-  .hero aside .action { margin-top: 18px; }
-  .hero aside .action .btn { width: 100%; justify-content: center; }
+  .rhythm-brief a:hover { background: var(--ink); color: var(--paper); }
 
   /* ------- section header ------- */
   .section-head {
-    border-top: var(--border); padding: 28px 0 20px;
+    border-top: var(--border); padding: 64px 0 28px;
+    margin-top: 56px;
     display: flex; justify-content: space-between; align-items: baseline;
   }
   .section-head .kicker { font-size: 12px; color: var(--ink-2); letter-spacing: 0; }
@@ -236,6 +244,12 @@
     width: 100%; height: 100%;
     display: block; border: 0;
   }
+  .video-placeholder .video-title {
+    font-family: var(--ff-mono); font-weight: 700;
+    font-size: 32px; line-height: 1.1; letter-spacing: -0.03em;
+    color: var(--paper); text-align: center; text-transform: none;
+    margin: 8px auto 28px; max-width: 720px;
+  }
 
   /* ------- full-width red band (quote — retained if reused elsewhere) ------- */
   .red-band-full {
@@ -248,8 +262,8 @@
   .red-band-full .attr { font-family: var(--ff-mono); font-size: 13px; opacity: 0.9;}
 
   /* ------- who + where ------- */
-  .whowhere { padding: 48px 0 48px; border-top: var(--border); }
-  .whowhere .section-head { border-top: 0; padding-top: 0; }
+  .whowhere { padding: 0; }
+  .whowhere .section-head { border-top: 0; margin-top: 0; padding-top: 32px; }
   .whowhere .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
   .whowhere .card h3 {
     font-family: var(--ff-mono); font-size: 13px; font-weight: 500;
@@ -269,7 +283,24 @@
     font-size: 64px; line-height: 1; letter-spacing: -0.04em; margin: 0;
     max-width: 14ch; text-transform: none;
   }
-  .join .card-join { border: var(--border); padding: 32px; background: var(--paper); box-sizing: border-box; }
+  .join .join-sub { font-size: 14px; color: var(--ink-2); margin: 20px 0 0; max-width: 32ch; }
+  .join .join-sub::before { content: "※ "; color: var(--riso-red-ink); }
+  .join .card-join { border: var(--border); padding: 32px; background: var(--paper); box-sizing: border-box; position: relative; }
+  .join .card-join .date-stamp {
+    position: absolute;
+    top: -16px; right: -10px;
+    background: var(--riso-red);
+    color: var(--paper);
+    padding: 10px 14px;
+    transform: rotate(-3deg);
+    letter-spacing: 0;
+    line-height: 1.1;
+    z-index: 2;
+    white-space: nowrap;
+  }
+  .join .card-join .date-stamp .when { display: block; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 3px; }
+  .join .card-join .date-stamp .big { display: block; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+  .join .card-join .date-stamp .sep { opacity: 0.6; margin: 0 3px; }
   .join .card-join * { box-sizing: border-box; }
   .join .card-join .kicker { font-size: 12px; color: var(--riso-red-ink); margin: 0 0 6px; letter-spacing: 0.02em; }
   .join .card-join .kicker::before { content: "※ "; }
@@ -278,6 +309,7 @@
     line-height: 1; letter-spacing: -0.03em; margin: 8px 0 4px;
   }
   .join .card-join .price .per { font-size: 18px; font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
+  .join .card-join .price .tax { font-size: 12px; font-weight: 400; color: var(--ink-3); letter-spacing: 0; margin-left: 4px; }
   .join .card-join .tagline { font-size: 13px; color: var(--ink-2); margin: 0 0 22px; }
   .join .card-join .progress {
     padding: 14px 0;
@@ -323,8 +355,9 @@
   .faq .item { border-top: 1px solid var(--mist-2); padding-top: 16px; }
   .faq .q { font-family: var(--ff-mono); font-size: 15px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; text-transform: none; }
   .faq .q::before { content: "◆ "; color: var(--riso-red); }
-  .faq .a { font-size: 14px; line-height: 1.6; margin: 0; color: var(--ink); }
-  .faq .a a { color: var(--ink); }
+  .faq .a { font-size: 14px; line-height: 1.6; margin: 0 0 10px; color: var(--ink); }
+  .faq .a:last-child { margin-bottom: 0; }
+  .faq .a.note { color: var(--ink-2); font-style: italic; font-size: 13px; }
 
   /* ------- footer ------- */
   footer.site {
@@ -355,6 +388,25 @@
     .red-band-full { flex-direction: column; align-items: flex-start; }
     .join h2 { font-size: 44px; }
   }
+
+  @media (max-width: 640px) {
+    .container { padding: 0 24px; }
+    nav.top .links { display: none; }
+    nav.top .lockup .wm { white-space: nowrap; }
+    .hero { padding: 56px 0 48px; }
+    .hero h1 { font-size: 44px; }
+    .hero aside { padding: 18px; }
+    .hero aside pre.ascii-card { font-size: 11px; }
+    .join h2 { font-size: 36px; }
+    .join .card-join { padding: 24px; }
+    .join .card-join .date-stamp { top: -12px; right: -8px; padding: 8px 12px; }
+    .join .card-join .date-stamp .big { font-size: 16px; }
+    .join .card-join .price { font-size: 48px; }
+    .section-head { padding: 40px 0 20px; }
+    .section-head h2 { font-size: 32px; }
+    .outcomes-lede { font-size: 14px; }
+    .video-placeholder .video-title { font-size: 22px; margin: 20px auto 20px; }
+  }
 </style>
 </head>
 <body data-cc-id="cc-1" style="cursor: crosshair;">
@@ -363,7 +415,7 @@
 
   <!-- ───────── nav ───────── -->
   <nav class="top" data-cc-id="cc-4">
-    <div class="lockup">
+    <a class="lockup" href="/" aria-label="ai makers club — home">
       <svg viewBox="4 20 116 74">
         <g font-family="'JetBrains Mono', monospace" fill="#15224A">
           <text x="10" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em">[</text>
@@ -372,12 +424,12 @@
         </g>
       </svg>
       <span class="wm">ai makers club</span>
-    </div>
+    </a>
     <div class="nav-right">
       <div class="links">
+        <a href="#who">who &amp; where</a>
         <a href="#outcomes">outcomes</a>
         <a href="#rhythm">rhythm</a>
-        <a href="#who">who &amp; where</a>
         <a href="#faq">faq</a>
       </div>
       <a class="btn btn--ghost" href="#join" style="padding: 8px 14px; font-size: 13px;" data-cc-id="cc-27">join →</a>
@@ -387,30 +439,33 @@
   <!-- ───────── hero ───────── -->
   <section class="hero" data-cc-id="cc-5">
     <div data-cc-id="cc-1">
-      <div class="weeknum" data-cc-id="cc-6">※ starting april 27th · 33 founding spots</div>
+      <div class="weeknum" data-cc-id="cc-6">※ starting may 4th · 33 founding spots</div>
       <h1 data-cc-id="cc-7" style="">learn AI&nbsp;<br>by making.</h1>
-      <p class="sub">a weekly workshop for creatives who'd rather learn by doing than watch tutorials.</p>
+      <p class="sub">a community of creatives who'd rather ship than watch tutorials. new brief every monday.</p>
       <div class="ctas" data-cc-id="cc-2">
         <a class="btn" href="#join">join the club <span class="cursor">▌</span></a>
       </div>
     </div>
 
     <aside data-cc-id="cc-8">
-      <div class="label" data-cc-id="cc-18">next week</div>
-<pre data-cc-id="cc-19" style="">┌─ wk001 ────────────────────┐
-│ build an automation that   │
-│ saves you an hour a week.  │
-└────────────────────────────┘</pre>
-      <div class="row"><span>starts</span><b>mon april 27th · 09:00 GMT</b></div>
-      <div class="row"><span>due</span><b>sun may 3rd · 24:00 GMT</b></div>
-      <div class="row"><span>makers</span><b>33</b></div>
-      <div class="action"><a class="btn btn--accent" href="briefs/wk001.html">read the brief →</a></div>
+<pre class="ascii-card">+--------------------------------------------+
+|  <span class="ascii-path">~/value-prop.md</span>                           |
+|  what you get                              |
++--------------------------------------------+
+     │
+     ├── online community with resources
+     ├── monday brief, shippable in a week
+     ├── learn + build with latest AI tools
+     ├── support from fellow makers
+     ├── ship projects you'll actually use
+     └── no coding knowledge needed</pre>
     </aside>
   </section>
 
   <!-- ───────── intro video ───────── -->
   <div class="video-placeholder" aria-label="intro video">
     <div class="meta">video/intro.mp4</div>
+    <h2 class="video-title">the fastest way to actually learn ai.</h2>
     <div class="frame">
       <iframe
         src="https://www.youtube-nocookie.com/embed/CHV7Jzaq6R4"
@@ -421,11 +476,34 @@
     </div>
   </div>
 
+  <!-- ───────── who + where ───────── -->
+  <section id="who" class="whowhere">
+    <div class="section-head">
+      <div>
+        <div class="kicker">01 — the club</div>
+        <h2>who &amp; where.</h2>
+      </div>
+      <div class="right"></div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>who.md</h3>
+        <p class="lede">creatives with "a maker gene".</p>
+        <p>designers, illustrators, writers, photographers, architects, founders. any level, any stack. the only requirement: you want to make things with AI, not read about it.</p>
+      </div>
+      <div class="card">
+        <h3>where.md</h3>
+        <p class="lede">a private community on circle.</p>
+        <p>channels to discuss and connect. resources to get you unstuck. the weekly brief, the show-&amp;-tell thread, and every guide we've ever shipped. all in one room.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ───────── outcomes ───────── -->
   <section id="outcomes">
     <div class="section-head">
       <div>
-        <div class="kicker">01 — the outcomes</div>
+        <div class="kicker">02 — the outcomes</div>
         <h2>what you'll make.</h2>
       </div>
       <div class="right"></div>
@@ -435,12 +513,12 @@
       <div class="o-card">
         <div class="num">01</div>
         <h3>a personal assistant</h3>
-        <p>an assistant that handles the everyday stuff — replying emails, finding flights, ordering groceries, booking dinners, hunting gifts, prepping for meetings. one prompt, done.</p>
+        <p>an assistant that handles the everyday stuff: replying emails, finding flights, ordering groceries, booking dinners, hunting gifts, prepping for meetings. one prompt, done.</p>
       </div>
       <div class="o-card">
         <div class="num">02</div>
         <h3>a saas (or a clickable prototype)</h3>
-        <p>a product people actually pay for — or a working prototype to test demand first. checkout, database, admin panel, email flow.</p>
+        <p>a product people actually pay for, or a working prototype to test demand first. checkout, database, admin panel, email flow.</p>
       </div>
       <div class="o-card">
         <div class="num">03</div>
@@ -450,21 +528,21 @@
       <div class="o-card">
         <div class="num">04</div>
         <h3>a personal site</h3>
-        <p>not a wordpress template. a site that reflects how you actually think — copy, layout, interactions — deployed on your own domain for ~$10/yr.</p>
+        <p>not a wordpress template. a site that reflects how you actually think (copy, layout, interactions), deployed on your own domain for ~$10/yr.</p>
       </div>
       <div class="o-card">
         <div class="num">05</div>
         <h3>programmatic video</h3>
-        <p>video built from code instead of timeline-scrubbing. product demos, explainers, social posts, animated hero reels — templated once, remixed forever.</p>
+        <p>video built from code instead of timeline-scrubbing. product demos, explainers, social posts, animated hero reels. templated once, remixed forever.</p>
       </div>
       <div class="o-card">
         <div class="num">06</div>
         <h3>a custom dashboard</h3>
-        <p>pull revenue, calendar, analytics, fitness — into one view you control, instead of flipping between five tools your team already pays for.</p>
+        <p>pull revenue, calendar, analytics, fitness into one view you control, instead of flipping between five tools your team already pays for.</p>
       </div>
       <div class="o-card o-card--ghost">
         <div class="plus">+</div>
-        <p>more technologies &amp; your ideas — no closed list.</p>
+        <p>more technologies &amp; your ideas. no closed list.</p>
       </div>
     </div>
   </section>
@@ -473,7 +551,7 @@
   <section id="rhythm">
     <div class="section-head">
       <div>
-        <div class="kicker">02 — the rhythm</div>
+        <div class="kicker">03 — the rhythm</div>
         <h2>one week, three beats.</h2>
       </div>
       <div class="right"></div>
@@ -512,28 +590,8 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- ───────── who + where ───────── -->
-  <section id="who" class="whowhere">
-    <div class="section-head">
-      <div>
-        <div class="kicker">03 — the club</div>
-        <h2>who &amp; where.</h2>
-      </div>
-      <div class="right"></div>
-    </div>
-    <div class="grid">
-      <div class="card">
-        <h3>who.md</h3>
-        <p class="lede">creatives with "a maker gene".</p>
-        <p>designers, illustrators, writers, photographers, architects, founders. any level, any stack. the only requirement: you want to make things with AI, not read about it.</p>
-      </div>
-      <div class="card">
-        <h3>where.md</h3>
-        <p class="lede">a private community on circle.</p>
-        <p>channels to discuss and connect. resources to get you unstuck. the weekly brief, the show-&amp;-tell thread, and every guide we've ever shipped — all in one room.</p>
-      </div>
+    <div class="rhythm-brief">
+      <a href="briefs/wk001.html">read the next brief →</a>
     </div>
   </section>
 
@@ -541,10 +599,16 @@
   <!-- counter wiring: hook Paddle webhook → server → update .spots-sold text
        and the data-sold attribute. keep both in sync. -->
   <section id="join" class="join">
-    <h2>join the first 33.</h2>
+    <div>
+      <h2>join the first 33.</h2>
+    </div>
     <div class="card-join">
+      <div class="date-stamp">
+        <span class="when">first brief drops</span>
+        <span class="big">mon<span class="sep">·</span>may 4</span>
+      </div>
       <div class="kicker">founding members · limited to 33</div>
-      <div class="price">$49<span class="per"> / month</span></div>
+      <div class="price">$49<span class="tax">+tax</span><span class="per"> / month</span></div>
       <p class="tagline">this price never goes up for you.</p>
       <div class="progress">
         <div class="progress-bar" aria-hidden="true">[<span class="bar-filled"></span><span class="bar-empty">·································</span>]</div>
@@ -565,7 +629,7 @@
         <div class="kicker">04 — questions</div>
         <h2>faq.</h2>
       </div>
-      <div class="right">read before you join</div>
+      <div class="right"></div>
     </div>
     <div class="list">
       <div class="item">
@@ -582,7 +646,7 @@
       </div>
       <div class="item">
         <h4 class="q">what do those tools cost?</h4>
-        <p class="a">entry tier is usually enough — around $20/month. depends on how much you want to ship. not included in the club price.</p>
+        <p class="a">entry tier is usually enough (around $20/month). depends on how much you want to ship. not included in the club price.</p>
       </div>
       <div class="item">
         <h4 class="q">what's the time commitment?</h4>
@@ -602,7 +666,10 @@
       </div>
       <div class="item">
         <h4 class="q">who's running this?</h4>
-        <p class="a"><a href="https://www.linkedin.com/in/alenfa/" target="_blank" rel="noopener">alen faljic</a>, founder of d.mba. not a developer — background in education, built dozens of internal tools and games for students, currently full-time on staying at the edge of AI tools.</p>
+        <p class="a"><a href="https://www.linkedin.com/in/alenfa/" target="_blank" rel="noopener">alen faljic</a> and <a href="https://www.linkedin.com/in/thomasprioruk/" target="_blank" rel="noopener">tom prior</a>, d.mba's founder and program director. neither of us is a developer.</p>
+        <p class="a">between us we built: AI tutors, classroom games, a self-running finance dashboard, a telegram workout coach, team tools saving 10+ hours a week, and an app shipped to the app store with paying customers.</p>
+        <p class="a">two non-devs, both shipping. this club is where we share how.</p>
+        <p class="a note">(senior engineers are on call when we hit our limits. so you're not learning from guessers.)</p>
       </div>
     </div>
   </section>

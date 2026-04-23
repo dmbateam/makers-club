@@ -1,5 +1,38 @@
 import { getStore } from '@netlify/blobs';
 import crypto from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// Load welcome email template once, at module init.
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const WELCOME_HTML = readFileSync(
+  path.join(__dirname, 'emails', 'welcome.html'),
+  'utf-8'
+);
+const WELCOME_SUBJECT = "Welcome to ai makers club.";
+
+async function sendWelcomeEmail(toEmail) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.RESEND_FROM || 'alen@d.mba';
+  if (!apiKey || !toEmail) return { skipped: true };
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: `Alen · ai makers club <${from}>`,
+      to: toEmail,
+      subject: WELCOME_SUBJECT,
+      html: WELCOME_HTML,
+    }),
+  });
+  const body = await res.json().catch(() => ({}));
+  return { status: res.status, body };
+}
 
 // Paddle Classic signs webhooks: PHP-serialize alphabetically-sorted params
 // (minus p_signature), verify SHA1 with the vendor's RSA public key.
@@ -102,8 +135,21 @@ export default async (req) => {
       await store.set('sold', String(next));
     }
 
+    // Send welcome email on new subscription. Non-blocking: failures here
+    // must not cause a non-2xx response (Paddle would retry and we'd
+    // double-count / double-send).
+    stage = 'send_welcome';
+    let email_result = null;
+    if (params.alert_name === 'subscription_created') {
+      try {
+        email_result = await sendWelcomeEmail(params.email);
+      } catch (e) {
+        email_result = { error: e?.message || String(e) };
+      }
+    }
+
     return new Response(
-      JSON.stringify({ ok: true, alert_name: params.alert_name, sold: next }),
+      JSON.stringify({ ok: true, alert_name: params.alert_name, sold: next, email_result }),
       { status: 200, headers: { 'content-type': 'application/json' } }
     );
   } catch (err) {
