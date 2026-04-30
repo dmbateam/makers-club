@@ -1,0 +1,7 @@
+# Legacy paths from the pre-rename layout
+/index-mono      /       301
+/index-mono.html /       301
+
+# Checkout moved off-site to d.mba/ai-makers-club
+/join            https://d.mba/ai-makers-club  301
+/join/*          https://d.mba/ai-makers-club  301

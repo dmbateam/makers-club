@@ -1,4 +1,23 @@
+[build]
+  publish = "public"
+
+[build.environment]
+  # Pin to Node 20 — Node 22's native ESM __dirname binding collides with
+  # the shim Netlify's bundler injects when functions use fileURLToPath,
+  # causing "Identifier '__dirname' has already been declared" at runtime.
+  NODE_VERSION = "20"
+
 [functions]
   # Bundle non-JS assets (e.g. HTML email templates) alongside functions
   # so they can be read with fs at runtime.
   included_files = ["netlify/functions/emails/**"]
+
+# Defense-in-depth headers for every response. STS is already on by default.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.youtube-nocookie.com; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"

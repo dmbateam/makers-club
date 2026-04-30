@@ -1,0 +1,33 @@
+<svg width="90" height="70" viewBox="0 0 90 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="20" y="30" width="10" height="10" fill="#15224A"/>
+<rect x="30" y="20" width="10" height="10" fill="#15224A"/>
+<rect x="30" y="30" width="10" height="10" fill="#15224A"/>
+<rect x="30" y="40" width="10" height="10" fill="#15224A"/>
+<rect x="40" y="10" width="10" height="10" fill="#15224A"/>
+<rect x="40" y="20" width="10" height="10" fill="#15224A"/>
+<rect x="40" y="30" width="10" height="10" fill="#15224A"/>
+<rect x="40" y="40" width="10" height="10" fill="#15224A"/>
+<rect x="40" y="50" width="10" height="10" fill="#15224A"/>
+<rect x="50" y="20" width="10" height="10" fill="#15224A"/>
+<rect x="50" y="30" width="10" height="10" fill="#15224A"/>
+<rect x="50" y="40" width="10" height="10" fill="#15224A"/>
+<rect x="60" y="30" width="10" height="10" fill="#15224A"/>
+<rect x="10" width="10" height="10" fill="#15224A"/>
+<rect x="80" y="70" width="10" height="10" transform="rotate(-180 80 70)" fill="#15224A"/>
+<path d="M0 10C0 4.47715 4.47715 0 10 0V0V10H0V10Z" fill="#15224A"/>
+<path d="M90 60C90 65.5228 85.5228 70 80 70V70L80 60L90 60V60Z" fill="#15224A"/>
+<rect y="10" width="10" height="10" fill="#15224A"/>
+<rect x="90" y="60" width="10" height="10" transform="rotate(-180 90 60)" fill="#15224A"/>
+<rect y="20" width="10" height="10" fill="#15224A"/>
+<rect x="90" y="50" width="10" height="10" transform="rotate(-180 90 50)" fill="#15224A"/>
+<rect y="30" width="10" height="10" fill="#15224A"/>
+<rect x="90" y="40" width="10" height="10" transform="rotate(-180 90 40)" fill="#15224A"/>
+<rect y="40" width="10" height="10" fill="#15224A"/>
+<rect x="90" y="30" width="10" height="10" transform="rotate(-180 90 30)" fill="#15224A"/>
+<rect y="50" width="10" height="10" fill="#15224A"/>
+<rect x="90" y="20" width="10" height="10" transform="rotate(-180 90 20)" fill="#15224A"/>
+<path d="M0 60H10V70V70C4.47715 70 0 65.5228 0 60V60Z" fill="#15224A"/>
+<path d="M90 10L80 10L80 -8.74228e-07V-8.74228e-07C85.5228 -3.91405e-07 90 4.47715 90 10V10Z" fill="#15224A"/>
+<rect x="10" y="60" width="10" height="10" fill="#15224A"/>
+<rect x="80" y="10" width="10" height="10" transform="rotate(-180 80 10)" fill="#15224A"/>
+</svg>

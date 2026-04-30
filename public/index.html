@@ -9,7 +9,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ai makers club — mono variant</title>
+<title>ai makers club</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="colors_and_type.css">
 <style>
@@ -72,7 +72,23 @@
     border: var(--border);
     background: var(--paper-2);
     box-sizing: border-box;
+    position: relative;
   }
+  .hero aside .date-stamp {
+    position: absolute;
+    top: -16px; right: -10px;
+    background: var(--riso-red);
+    color: var(--paper);
+    padding: 10px 14px;
+    transform: rotate(-3deg);
+    letter-spacing: 0;
+    line-height: 1.1;
+    z-index: 2;
+    white-space: nowrap;
+  }
+  .hero aside .date-stamp .when { display: block; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 3px; color: var(--paper); }
+  .hero aside .date-stamp .big { display: block; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; color: var(--paper); }
+  .hero aside .date-stamp .sep { opacity: 0.7; padding: 0 2px; }
   .hero aside pre.ascii-card {
     font-family: var(--ff-mono);
     font-size: 13px; line-height: 1.5;
@@ -97,7 +113,7 @@
 
   /* ------- section header ------- */
   .section-head {
-    border-top: var(--border); padding: 64px 0 28px;
+    padding: 64px 0 28px;
     margin-top: 56px;
     display: flex; justify-content: space-between; align-items: baseline;
   }
@@ -277,7 +293,7 @@
   .whowhere .card p { font-size: 14px; line-height: 1.6; margin: 0; color: var(--ink); }
 
   /* ------- join (founding members CTA) ------- */
-  .join { padding: 72px 0 64px; border-top: var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .join { padding: 72px 0 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
   .join h2 {
     font-family: var(--ff-mono); font-weight: 700;
     font-size: 64px; line-height: 1; letter-spacing: -0.04em; margin: 0;
@@ -349,7 +365,7 @@
   .join .card-join .included li::before { content: "◆ "; color: var(--riso-red); }
 
   /* ------- faq ------- */
-  .faq { padding: 32px 0 96px; border-top: var(--border); }
+  .faq { padding: 32px 0 96px; }
   .faq .section-head { border-top: 0; padding-top: 32px; }
   .faq .list { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 48px; margin-top: 40px; }
   .faq .item { border-top: 1px solid var(--mist-2); padding-top: 16px; }
@@ -407,6 +423,50 @@
     .outcomes-lede { font-size: 14px; }
     .video-placeholder .video-title { font-size: 22px; margin: 20px auto 20px; }
   }
+
+  /* ───────── sold-out state ───────── */
+  .join h2 .struck {
+    text-decoration: line-through;
+    text-decoration-thickness: 4px;
+    text-decoration-color: var(--riso-red);
+    color: var(--ink-3);
+  }
+  .date-stamp--soldout .big--soldout {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .live--closed {
+    color: var(--riso-red) !important;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .progress-bar .bar-filled { color: var(--riso-red); }
+
+  /* waitlist form */
+  .waitlist-form { display: grid; gap: 10px; margin-top: 14px; }
+  .waitlist-input {
+    font-family: var(--ff-mono); font-size: 14px;
+    padding: 12px 14px; border: var(--border);
+    background: var(--paper); color: var(--ink);
+    width: 100%; box-sizing: border-box;
+  }
+  .waitlist-input:focus { outline: 2px solid var(--riso-red); outline-offset: 2px; }
+  .waitlist-success {
+    display: none;
+    border: var(--border); padding: 14px;
+    background: var(--paper-2);
+    margin-top: 14px; font-size: 14px;
+  }
+  .waitlist-success .check { color: var(--riso-red); font-weight: 700; margin-right: 4px; }
+  body.waitlist-submitted .waitlist-form { display: none; }
+  body.waitlist-submitted .waitlist-success { display: block; }
+  .waitlist-form.is-submitting button { opacity: 0.6; pointer-events: none; }
+  .waitlist-form .err {
+    color: var(--riso-red-ink); font-size: 13px;
+    display: none; margin-top: 4px;
+  }
+  .waitlist-form.has-error .err { display: block; }
 </style>
 </head>
 <body data-cc-id="cc-1" style="cursor: crosshair;">
@@ -416,13 +476,37 @@
   <!-- ───────── nav ───────── -->
   <nav class="top" data-cc-id="cc-4">
     <a class="lockup" href="/" aria-label="ai makers club — home">
-      <svg viewBox="4 20 116 74">
-        <g font-family="'JetBrains Mono', monospace" fill="#15224A">
-          <text x="10" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em">[</text>
-          <circle cx="73" cy="51" r="10"></circle>
-          <text x="78" y="86" font-size="96" font-weight="700" letter-spacing="-0.02em" data-cc-id="cc-3">]</text>
-        </g>
-      </svg>
+      <svg viewBox="0 0 90 70" style="height: 22px; width: auto;"><g fill="#15224A"><rect x="20" y="30" width="10" height="10"/>
+<rect x="30" y="20" width="10" height="10"/>
+<rect x="30" y="30" width="10" height="10"/>
+<rect x="30" y="40" width="10" height="10"/>
+<rect x="40" y="10" width="10" height="10"/>
+<rect x="40" y="20" width="10" height="10"/>
+<rect x="40" y="30" width="10" height="10"/>
+<rect x="40" y="40" width="10" height="10"/>
+<rect x="40" y="50" width="10" height="10"/>
+<rect x="50" y="20" width="10" height="10"/>
+<rect x="50" y="30" width="10" height="10"/>
+<rect x="50" y="40" width="10" height="10"/>
+<rect x="60" y="30" width="10" height="10"/>
+<rect x="10" width="10" height="10"/>
+<rect x="80" y="70" width="10" height="10" transform="rotate(-180 80 70)"/>
+<path d="M0 10C0 4.47715 4.47715 0 10 0V0V10H0V10Z"/>
+<path d="M90 60C90 65.5228 85.5228 70 80 70V70L80 60L90 60V60Z"/>
+<rect y="10" width="10" height="10"/>
+<rect x="90" y="60" width="10" height="10" transform="rotate(-180 90 60)"/>
+<rect y="20" width="10" height="10"/>
+<rect x="90" y="50" width="10" height="10" transform="rotate(-180 90 50)"/>
+<rect y="30" width="10" height="10"/>
+<rect x="90" y="40" width="10" height="10" transform="rotate(-180 90 40)"/>
+<rect y="40" width="10" height="10"/>
+<rect x="90" y="30" width="10" height="10" transform="rotate(-180 90 30)"/>
+<rect y="50" width="10" height="10"/>
+<rect x="90" y="20" width="10" height="10" transform="rotate(-180 90 20)"/>
+<path d="M0 60H10V70V70C4.47715 70 0 65.5228 0 60V60Z"/>
+<path d="M90 10L80 10L80 -8.74228e-07V-8.74228e-07C85.5228 -3.91405e-07 90 4.47715 90 10V10Z"/>
+<rect x="10" y="60" width="10" height="10"/>
+<rect x="80" y="10" width="10" height="10" transform="rotate(-180 80 10)"/></g></svg>
       <span class="wm">ai makers club</span>
     </a>
     <div class="nav-right">
@@ -439,15 +523,18 @@
   <!-- ───────── hero ───────── -->
   <section class="hero" data-cc-id="cc-5">
     <div data-cc-id="cc-1">
-      <div class="weeknum" data-cc-id="cc-6">※ starting may 4th · 33 founding spots</div>
       <h1 data-cc-id="cc-7" style="">learn AI&nbsp;<br>by making.</h1>
       <p class="sub">a community of creatives who'd rather ship than watch tutorials. new brief every monday.</p>
       <div class="ctas" data-cc-id="cc-2">
-        <a class="btn" href="#join">join the club <span class="cursor">▌</span></a>
+        <a class="btn" href="#join">sold out · join waitlist <span class="cursor">▌</span></a>
       </div>
     </div>
 
     <aside data-cc-id="cc-8">
+      <div class="date-stamp date-stamp--soldout">
+        <span class="when">33 founding spots</span>
+        <span class="big big--soldout">sold<span class="sep">·</span>out</span>
+      </div>
 <pre class="ascii-card">+--------------------------------------------+
 |  <span class="ascii-path">~/value-prop.md</span>                           |
 |  what you get                              |
@@ -508,7 +595,7 @@
       </div>
       <div class="right"></div>
     </div>
-    <p class="outcomes-lede">the club teaches you to shape the computer to your craft. not the other way around.</p>
+    <p class="outcomes-lede">briefs target the fundamental concepts and the just-shipped technologies. small enough to make in a week.</p>
     <div class="outcome-cards">
       <div class="o-card">
         <div class="num">01</div>
@@ -542,7 +629,7 @@
       </div>
       <div class="o-card o-card--ghost">
         <div class="plus">+</div>
-        <p>more technologies &amp; your ideas. no closed list.</p>
+        <p>latest technologies &amp; your ideas. no closed list.</p>
       </div>
     </div>
   </section>
@@ -591,7 +678,7 @@
       </div>
     </div>
     <div class="rhythm-brief">
-      <a href="briefs/wk001.html">read the next brief →</a>
+      <a href='/briefs/wk001'>see a sample brief →</a>
     </div>
   </section>
 
@@ -600,25 +687,30 @@
        and the data-sold attribute. keep both in sync. -->
   <section id="join" class="join">
     <div>
-      <h2>join the first 33.</h2>
+      <h2><s class="struck">join the first 33.</s></h2>
     </div>
     <div class="card-join">
-      <div class="date-stamp">
-        <span class="when">first brief drops</span>
-        <span class="big">mon<span class="sep">·</span>may 4</span>
+      <div class="date-stamp date-stamp--soldout">
+        <span class="big big--soldout">sold<span class="sep">·</span>out</span>
       </div>
       <div class="kicker">founding members · limited to 33</div>
       <div class="price">$49<span class="tax">+tax</span><span class="per"> / month</span></div>
-      <p class="tagline">this price never goes up for you.</p>
+      <p class="tagline">founding rate. price goes up next time we open.</p>
       <div class="progress">
-        <div class="progress-bar" aria-hidden="true">[<span class="bar-filled"></span><span class="bar-empty">·································</span>]</div>
+        <div class="progress-bar" aria-hidden="true">[<span class="bar-filled"></span><span class="bar-empty"></span>]</div>
         <div class="progress-meta">
-          <span><b class="spots-sold" data-sold="0">00</b> of 33 claimed</span>
-          <span class="live">open</span>
+          <span><b class="spots-sold" data-sold="33">33</b> of 33 claimed</span>
+          <span class="live live--closed">closed</span>
         </div>
       </div>
-      <a class="btn btn--accent" href="/join">join the club <span class="cursor">▌</span></a>
-      <p class="finep">month to month. cancel anytime.<br>when the 33 fill, doors close and the price goes up.</p>
+      <form class="waitlist-form" id="waitlist-form">
+        <input class="waitlist-input" type="email" required placeholder="your@email" autocomplete="email" name="email">
+        <button class="btn" type="submit">join waitlist <span class="cursor">▌</span></button>
+      </form>
+      <div class="waitlist-success">
+        <span class="check">[✓]</span> you're on the list. we'll write when doors open again.
+      </div>
+      <p class="finep">we'll write you when doors open again.<br>no spam, no other lists.</p>
     </div>
   </section>
 
@@ -711,24 +803,48 @@
     update();
   })();
 
-  // ---- founding-cohort counter ----
-  // Reads /api/spots-sold (served by netlify/functions/spots-sold.mjs) and
-  // syncs the count text, data-sold attr, and the ascii bar glyphs.
-  // Filled slots render as U+2588 FULL BLOCK; empty as U+00B7 MIDDLE DOT.
-  (async function () {
-    try {
-      const r = await fetch('/api/spots-sold', { cache: 'no-store' });
-      if (!r.ok) return;
-      const { sold, total } = await r.json();
-      const n = Math.max(0, Math.min(total, sold | 0));
+  // ---- founding-cohort counter (sold-out state) ----
+  // Page is now in sold-out mode: bar pinned to 33/33, no /api/spots-sold poll.
+  (function () {
+    const total = 33, n = 33;
+    document.querySelectorAll('.spots-sold').forEach(el => {
+      el.textContent = String(n).padStart(2, '0');
+      el.dataset.sold = String(n);
+    });
+    document.querySelectorAll('.bar-filled').forEach(el => { el.textContent = '█'.repeat(n); });
+    document.querySelectorAll('.bar-empty').forEach(el => { el.textContent = '·'.repeat(total - n); });
+  })();
 
-      document.querySelectorAll('.spots-sold').forEach(el => {
-        el.textContent = String(n).padStart(2, '0');
-        el.dataset.sold = String(n);
-      });
-      document.querySelectorAll('.bar-filled').forEach(el => { el.textContent = '█'.repeat(n); });
-      document.querySelectorAll('.bar-empty').forEach(el => { el.textContent = '·'.repeat(total - n); });
-    } catch (_) { /* offline / local preview — leave placeholder 00 */ }
+  // ---- waitlist form: POST email to /api/waitlist (Kit) ----
+  (function () {
+    const form = document.getElementById('waitlist-form');
+    if (!form) return;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      form.classList.remove('has-error');
+      form.classList.add('is-submitting');
+      const email = form.querySelector('input[name="email"]').value.trim();
+      try {
+        const r = await fetch('/api/waitlist', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        if (!r.ok) throw new Error('server returned ' + r.status);
+        document.body.classList.add('waitlist-submitted');
+      } catch (err) {
+        form.classList.add('has-error');
+        let errEl = form.querySelector('.err');
+        if (!errEl) {
+          errEl = document.createElement('div');
+          errEl.className = 'err';
+          form.appendChild(errEl);
+        }
+        errEl.textContent = "couldn't add you. try again, or email support@d.mba.";
+      } finally {
+        form.classList.remove('is-submitting');
+      }
+    });
   })();
 </script>
 

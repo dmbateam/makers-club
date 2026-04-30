@@ -5,9 +5,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Load welcome email template once, at module init.
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WELCOME_HTML = readFileSync(
-  path.join(__dirname, 'emails', 'welcome.html'),
+  path.join(HERE, 'emails', 'welcome.html'),
   'utf-8'
 );
 const WELCOME_SUBJECT = "Welcome to ai makers club.";
@@ -33,6 +33,54 @@ async function sendWelcomeEmail(toEmail) {
   const body = await res.json().catch(() => ({}));
   return { status: res.status, body };
 }
+
+// Kit ("customer-makers-club" tag) — applied on subscription_created so the
+// buyer flips from waitlist/lead segment into the paying-customer audience.
+// Tagging-only fails with 404 if the email isn't yet a Kit subscriber, so we
+// always create-or-find first via /v4/subscribers (idempotent: 201 new, 200
+// existing) and only then apply the tag.
+const KIT_AMC_TAG_ID = '19209626';
+
+async function tagInKit(toEmail) {
+  const apiKey = process.env.KIT_API_KEY;
+  if (!apiKey || !toEmail) return { skipped: true };
+
+  const headers = {
+    'X-Kit-Api-Key': apiKey,
+    'Content-Type': 'application/json',
+  };
+
+  const createRes = await fetch('https://api.kit.com/v4/subscribers', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ email_address: toEmail, state: 'active' }),
+  });
+  const createBody = await createRes.json().catch(() => ({}));
+  if (!createRes.ok) {
+    return { stage: 'create', status: createRes.status, body: createBody };
+  }
+
+  const tagRes = await fetch(
+    `https://api.kit.com/v4/tags/${KIT_AMC_TAG_ID}/subscribers`,
+    {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ email_address: toEmail }),
+    }
+  );
+  const tagBody = await tagRes.json().catch(() => ({}));
+  return {
+    stage: 'tag',
+    create_status: createRes.status,
+    tag_status: tagRes.status,
+    body: tagBody,
+  };
+}
+
+// AI Makers Club subscription plan ID. Paddle webhooks are vendor-wide
+// (every plan fires to every endpoint), so we filter on this to avoid
+// counting/emailing buyers of d.MBA Coaching, Academy, or Newsletter.
+const AMC_PLAN_ID = '924249';
 
 // Paddle Classic signs webhooks: PHP-serialize alphabetically-sorted params
 // (minus p_signature), verify SHA1 with the vendor's RSA public key.
@@ -97,8 +145,7 @@ export default async (req) => {
     stage = 'verify_signature';
     if (!verifySignature(params, publicKey)) {
       const normalized = normalizePem(publicKey);
-      const diag = {
-        error: 'invalid signature',
+      console.warn('paddle-webhook: invalid signature', {
         alert_name: params.alert_name || null,
         key_length: publicKey.length,
         key_lines: publicKey.split('\n').length,
@@ -107,12 +154,22 @@ export default async (req) => {
         key_has_begin: publicKey.includes('-----BEGIN PUBLIC KEY-----'),
         key_has_end: publicKey.includes('-----END PUBLIC KEY-----'),
         sig_present: Boolean(params.p_signature),
-        sig_prefix: (params.p_signature || '').slice(0, 20),
-      };
-      return new Response(JSON.stringify(diag, null, 2), {
-        status: 403,
-        headers: { 'content-type': 'application/json' },
       });
+      return new Response('forbidden', { status: 403 });
+    }
+
+    stage = 'plan_filter';
+    if (String(params.subscription_plan_id) !== AMC_PLAN_ID) {
+      return new Response(
+        JSON.stringify({
+          ok: true,
+          ignored: true,
+          reason: 'plan_mismatch',
+          plan_id: params.subscription_plan_id,
+          alert_name: params.alert_name,
+        }),
+        { status: 200, headers: { 'content-type': 'application/json' } }
+      );
     }
 
     stage = 'blobs_get';
@@ -135,38 +192,37 @@ export default async (req) => {
       await store.set('sold', String(next));
     }
 
-    // Send welcome email on new subscription. Non-blocking: failures here
-    // must not cause a non-2xx response (Paddle would retry and we'd
-    // double-count / double-send).
+    // Send welcome email + tag in Kit on new subscription. Non-blocking:
+    // failures here must not cause a non-2xx response (Paddle would retry
+    // and we'd double-count / double-send / double-tag).
     stage = 'send_welcome';
     let email_result = null;
+    let kit_result = null;
     if (params.alert_name === 'subscription_created') {
       try {
         email_result = await sendWelcomeEmail(params.email);
       } catch (e) {
         email_result = { error: e?.message || String(e) };
       }
+      try {
+        kit_result = await tagInKit(params.email);
+      } catch (e) {
+        kit_result = { error: e?.message || String(e) };
+      }
     }
 
     return new Response(
-      JSON.stringify({ ok: true, alert_name: params.alert_name, sold: next, email_result }),
+      JSON.stringify({ ok: true, alert_name: params.alert_name, sold: next, email_result, kit_result }),
       { status: 200, headers: { 'content-type': 'application/json' } }
     );
   } catch (err) {
-    return new Response(
-      JSON.stringify(
-        {
-          error: 'unhandled exception',
-          stage,
-          message: err?.message || String(err),
-          name: err?.name || null,
-          stack: (err?.stack || '').split('\n').slice(0, 6).join('\n'),
-        },
-        null,
-        2
-      ),
-      { status: 500, headers: { 'content-type': 'application/json' } }
-    );
+    console.error('paddle-webhook: unhandled exception', {
+      stage,
+      name: err?.name || null,
+      message: err?.message || String(err),
+      stack: err?.stack || null,
+    });
+    return new Response('internal error', { status: 500 });
   }
 };
 
