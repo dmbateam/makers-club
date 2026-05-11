@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>join ai makers club.</title>
+<meta name="description" content="join ai makers club: weekly briefs, a community of makers, learn AI by shipping.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/colors_and_type.css">
+<style>
+  html, body { background: var(--paper); }
+  body { margin: 0; font-family: var(--ff-mono); color: var(--ink); line-height: 1.55; }
+  * { box-sizing: border-box; }
+
+  .wrap { max-width: 560px; margin: 0 auto; padding: 32px 32px 96px; }
+
+  .lockup {
+    display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none; color: inherit;
+    margin-bottom: 48px;
+  }
+  .lockup svg { width: 34px; height: 22px; display: block; }
+  .lockup .wm { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+
+  h1 { font-size: var(--t-2xl); line-height: 1.1; margin: 0 0 40px; font-weight: 600; letter-spacing: -0.02em; }
+
+  .card {
+    border: var(--border);
+    padding: 28px;
+    background: var(--paper);
+    margin-bottom: 24px;
+  }
+  .card .price {
+    font-family: var(--ff-mono); font-size: 64px; font-weight: 700;
+    line-height: 1; letter-spacing: -0.03em; margin: 0 0 4px;
+  }
+  .card .price .tax { font-size: 12px; font-weight: 400; color: var(--ink-3); letter-spacing: 0; margin-left: 4px; }
+  .card .price .per { font-size: 18px; font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
+
+  ul.included {
+    list-style: none; padding: 16px 0 0; margin: 22px 0 0;
+    font-size: var(--t-sm); line-height: 1.8; color: var(--ink);
+    border-top: 1px solid var(--mist-2);
+  }
+  ul.included li::before { content: "→ "; color: var(--riso-red); }
+
+  .btn { width: 100%; justify-content: center; margin-top: 24px; font-size: var(--t-md); }
+  .btn[disabled] { opacity: 0.6; cursor: wait; }
+  .finep { font-size: var(--t-xs); color: var(--ink-2); margin-top: 16px; text-align: center; line-height: 1.6; }
+
+  .err {
+    display: none;
+    margin-top: 16px; padding: 12px 14px;
+    border: 1.5px solid var(--riso-red); color: var(--riso-red-ink);
+    font-size: var(--t-sm);
+  }
+  .err.show { display: block; }
+
+  footer.foot {
+    margin-top: 64px; padding-top: 24px;
+    border-top: 1px solid var(--mist-2);
+    font-size: var(--t-xs); color: var(--ink-3);
+    display: flex; justify-content: space-between; gap: 16px;
+  }
+  footer.foot a { color: var(--ink-3); text-decoration: none; }
+  footer.foot a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="lockup" href="https://ai-makers.club/" aria-label="ai makers club — home">
+    <svg viewBox="0 0 90 70"><g fill="#15224A"><rect x="20" y="30" width="10" height="10"/><rect x="30" y="20" width="10" height="10"/><rect x="30" y="30" width="10" height="10"/><rect x="30" y="40" width="10" height="10"/><rect x="40" y="10" width="10" height="10"/><rect x="40" y="20" width="10" height="10"/><rect x="40" y="30" width="10" height="10"/><rect x="40" y="40" width="10" height="10"/><rect x="40" y="50" width="10" height="10"/><rect x="50" y="20" width="10" height="10"/><rect x="50" y="30" width="10" height="10"/><rect x="50" y="40" width="10" height="10"/><rect x="60" y="30" width="10" height="10"/><rect x="10" width="10" height="10"/><rect x="80" y="70" width="10" height="10" transform="rotate(-180 80 70)"/><path d="M0 10C0 4.47715 4.47715 0 10 0V0V10H0V10Z"/><path d="M90 60C90 65.5228 85.5228 70 80 70V70L80 60L90 60V60Z"/><rect y="10" width="10" height="10"/><rect x="90" y="60" width="10" height="10" transform="rotate(-180 90 60)"/><rect y="20" width="10" height="10"/><rect x="90" y="50" width="10" height="10" transform="rotate(-180 90 50)"/><rect y="30" width="10" height="10"/><rect x="90" y="40" width="10" height="10" transform="rotate(-180 90 40)"/><rect y="40" width="10" height="10"/><rect x="90" y="30" width="10" height="10" transform="rotate(-180 90 30)"/><rect y="50" width="10" height="10"/><rect x="90" y="20" width="10" height="10" transform="rotate(-180 90 20)"/><path d="M0 60H10V70V70C4.47715 70 0 65.5228 0 60V60Z"/><path d="M90 10L80 10L80 -8.74228e-07V-8.74228e-07C85.5228 -3.91405e-07 90 4.47715 90 10V10Z"/><rect x="10" y="60" width="10" height="10"/><rect x="80" y="10" width="10" height="10" transform="rotate(-180 80 10)"/></g></svg>
+    <span class="wm">ai makers club</span>
+  </a>
+
+  <h1>join the club.</h1>
+
+  <div class="card">
+    <div class="price">
+      <span id="price-amount">$66</span><span class="tax">+tax</span><span class="per"> / month</span>
+    </div>
+
+    <ul class="included">
+      <li>new brief every monday</li>
+      <li>access to the community on circle</li>
+      <li>library of past briefs and resources</li>
+    </ul>
+
+    <button class="btn" id="join-btn">join ai makers club <span class="cursor">▌</span></button>
+
+    <div class="err" id="err"></div>
+
+    <p class="finep">
+      you'll be charged today and billed monthly. cancel anytime from your stripe portal.
+      access to the community starts immediately.
+    </p>
+  </div>
+
+  <footer class="foot">
+    <a href="https://ai-makers.club/terms/">terms</a>
+    <a href="https://ai-makers.club/privacy/">privacy</a>
+    <a href="https://ai-makers.club/refund/">refund</a>
+    <a href="mailto:support@d.mba">support@d.mba</a>
+  </footer>
+
+</div>
+
+<script>
+  // Dynamic price: ask the backend which currency applies based on geo.
+  // Default rendered HTML shows $80; we swap it on load if EUR applies.
+  fetch('/api/checkout-meta')
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      if (d && d.display) {
+        document.getElementById('price-amount').textContent = d.display;
+      }
+    })
+    .catch(() => { /* keep default */ });
+
+  const btn = document.getElementById('join-btn');
+  const err = document.getElementById('err');
+
+  btn.addEventListener('click', async () => {
+    err.classList.remove('show');
+    btn.disabled = true;
+    btn.textContent = 'preparing checkout';
+
+    try {
+      const res = await fetch('/api/create-checkout', { method: 'POST' });
+      if (!res.ok) {
+        const body = await res.text();
+        throw new Error('server returned ' + res.status + ': ' + body.slice(0, 200));
+      }
+      const data = await res.json();
+      if (!data.url) throw new Error('no checkout url returned');
+      window.location.href = data.url;
+    } catch (e) {
+      err.textContent = 'something went wrong: ' + (e.message || e) +
+        '. try again or email support@d.mba.';
+      err.classList.add('show');
+      btn.disabled = false;
+      btn.innerHTML = 'join ai makers club <span class="cursor">▌</span>';
+    }
+  });
+</script>
+
+</body>
+</html>
